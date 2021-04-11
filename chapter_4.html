@@ -195,7 +195,7 @@ fn main() {
 <p>Building the button widget works in the same way as the element widget. However, notice that the building of the element is now bound to a <code>container</code> variable. This is the <code>Entity</code> id of the element widget and is returned by the <code>.build(...)</code> function.</p>
 <p>This id is then used to specify the element widget as the parent of the button widget in the button's <code>.build(...)</code> function. The button widget style properties are also different to the element widget to help distinguish them. </p>
 <p>Running this code produces:</p>
-<p><img src="../images/composing_widgets_01.png" alt="adding_widgets_01" /></p>
+<p><img src="images/composing_widgets_01.png" alt="adding_widgets_01" /></p>
 <p>Composing widgets forms a tree, where each widget has a single parent and zero or more children. In tuix this tree is called the <code>Hierarchy</code>, and can be found in <code>State</code>. This hierarchy is used to propagate events as well as to draw the elements in the correct order.</p>
 <p>We will cover the <code>Hierarchy</code> in more detail when we start to handle events and custom drawing a little later. In the next section we'll cover the basics of widget layout.</p>
 
