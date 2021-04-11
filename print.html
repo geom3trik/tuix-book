@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Quick Start Guide</li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -254,7 +254,7 @@ fn main() {
 </li>
 </ul>
 <p>However, if you build and run this code you will still see an empty window.</p>
-<p><img src="../../images/adding_widgets_01.png" alt="adding_widgets_01" /></p>
+<p><img src="../images/adding_widgets_01.png" alt="adding_widgets_01" /></p>
 <p>This is because the <code>Element</code> widget has no built-in styling. To see the element, we can add a width, height, and background color using the builder:</p>
 <pre><code class="language-rs">use tuix::*;
 
@@ -276,7 +276,7 @@ fn main() {
 }
 </code></pre>
 <p>This will produce a nice orange widget in the top left corner of the window with a width of 100 pixels and a height of 30 pixels. In the next section we will look at how to compose widgets together by adding a button to our element widget.</p>
-<p><img src="../../images/adding_widgets_02.png" alt="adding_widgets_02" /></p>
+<p><img src="../images/adding_widgets_02.png" alt="adding_widgets_02" /></p>
 <h1 id="composing-widgets"><a class="header" href="#composing-widgets">Composing Widgets</a></h1>
 <p>To demonstrate the composition of widgets, let's add a <code>Button</code> widget to the <code>Element</code> widget we have from before:</p>
 <pre><code class="language-rs">use tuix::*;
@@ -309,7 +309,7 @@ fn main() {
 <p>Building the button widget works in the same way as the element widget. However, notice that the building of the element is now bound to a <code>container</code> variable. This is the <code>Entity</code> id of the element widget and is returned by the <code>.build(...)</code> function.</p>
 <p>This id is then used to specify the element widget as the parent of the button widget in the button's <code>.build(...)</code> function. The button widget style properties are also different to the element widget to help distinguish them. </p>
 <p>Running this code produces:</p>
-<p><img src="../../images/composing_widgets_01.png" alt="adding_widgets_01" /></p>
+<p><img src="../images/composing_widgets_01.png" alt="adding_widgets_01" /></p>
 <p>Composing widgets forms a tree, where each widget has a single parent and zero or more children. In tuix this tree is called the <code>Hierarchy</code>, and can be found in <code>State</code>. This hierarchy is used to propagate events as well as to draw the elements in the correct order.</p>
 <p>We will cover the <code>Hierarchy</code> in more detail when we start to handle events and custom drawing a little later. In the next section we'll cover the basics of widget layout.</p>
 <h1 id="widget-layout"><a class="header" href="#widget-layout">Widget Layout</a></h1>
@@ -349,7 +349,7 @@ fn main() {
     app.run();
 }
 </code></pre>
-<p><img src="../../images/widget_layout_01.png" alt="widget_layout_01" /></p>
+<p><img src="../images/widget_layout_01.png" alt="widget_layout_01" /></p>
 <p>We add space to each side of the element with units of <code>Strect(1.0)</code>. Looking at the horizontal axis, because both <code>left</code> and <code>right</code> are set to stretch, the layout algorithm splits the free space between them, resulting in equal space either side of the element. The same is done for the verical axis, resulting in a centered element.</p>
 <p>Notice also that the button has moved, remaining in the top left corner of the element. This is because widgets are positioned relative to their parents.</p>
 <h1 id="widget-styling"><a class="header" href="#widget-styling">Widget Styling</a></h1>
@@ -404,7 +404,7 @@ fn main() {
 }
 </code></pre>
 <p>Note that the style rule has to be added to the app using <code>state.add_style_rule()</code>. Note also that <em>inline</em> properties override <em>shared</em> properties, so although both widgets are affected by the shared style, the button keeps its blue color as it comes from an inline style rule. The height property, on the other hand, is shared between the two widgets. Below is the output of this code:</p>
-<p><img src="../../images/widget_styling_01.png" alt="widget_styling_01" /></p>
+<p><img src="../images/widget_styling_01.png" alt="widget_styling_01" /></p>
 <h1 id="handling-events"><a class="header" href="#handling-events">Handling Events</a></h1>
 
                     </main>
