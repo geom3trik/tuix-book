@@ -20,18 +20,18 @@ fn main() {
                 .set_height(Units::Pixels(30.0))
 
                 // Add stretch spacing to all sides of the element
-                .set_space_left(Units::Stretch(1.0))
-                .set_space_right(Units::Stretch(1.0))
-                .set_space_top(Units::Stretch(1.0))
-                .set_space_bottom(Units::Stretch(1.0))
+                .set_space_left(Stretch(1.0))
+                .set_space_right(Stretch(1.0))
+                .set_space_top(Stretch(1.0))
+                .set_space_bottom(Stretch(1.0))
 
                 .set_background_color(Color::rgb(200,80,20))
         );
 
         Button::new().build(state, container, |builder| 
             builder
-                .set_width(Units::Pixels(30.0))
-                .set_height(Units::Pixels(30.0))
+                .set_width(Pixels(30.0))
+                .set_height(Pixels(30.0))
                 .set_background_color(Color::rgb(20,80,200))
         );
 
@@ -44,6 +44,6 @@ fn main() {
 ![widget_layout_01](images/widget_layout_01.png)
 
 
-We add space to each side of the element with units of `Strect(1.0)`. Looking at the horizontal axis, because both `left` and `right` are set to stretch, the layout algorithm splits the free space between them, resulting in equal space either side of the element. The same is done for the verical axis, resulting in a centered element.
+We add space to each side of the element with units of `Stretch(1.0)`. Note, we could have also used `set_space()` to apply the same spacing to all sides. Looking at the horizontal axis, because both `left` and `right` are set to stretch, the layout algorithm splits the free space between them, resulting in equal space either side of the element. The same is done for the verical axis, resulting in a centered element.
 
 Notice also that the button has moved, remaining in the top left corner of the element. This is because widgets are positioned relative to their parents.
