@@ -36,7 +36,7 @@ jobs:
         override: true
 
     - name: Install mdbook
-      run: cargo install mdbook
+      run: which mdbook || cargo install mdbook
 
     - name: Build book
       run: mdbook build
