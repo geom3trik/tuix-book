@@ -1,5 +1,3 @@
-# Summary
-
 # Quick Start Guide
 
 - [Creating an Application](./chapter_1.md)

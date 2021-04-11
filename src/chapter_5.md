@@ -41,7 +41,7 @@ fn main() {
 }
 ```
 
-![widget_layout_01](../../images/widget_layout_01.png)
+![widget_layout_01](../images/widget_layout_01.png)
 
 
 We add space to each side of the element with units of `Strect(1.0)`. Looking at the horizontal axis, because both `left` and `right` are set to stretch, the layout algorithm splits the free space between them, resulting in equal space either side of the element. The same is done for the verical axis, resulting in a centered element.
