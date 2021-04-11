@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Creating an Application - Tuix Guide</title>
+        <title>Adding a Widget - Tuix Guide</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Quick Start Guide</li><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Quick Start Guide</li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,36 +163,73 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="creating-a-tuix-application"><a class="header" href="#creating-a-tuix-application">Creating a Tuix Application</a></h1>
-<p>The most basic tuix app looks like this:</p>
+                        <h1 id="adding-a-widget"><a class="header" href="#adding-a-widget">Adding a Widget</a></h1>
+<p>We can add a simple widget to our application like so:</p>
 <pre><code class="language-rs">use tuix::*;
 
 fn main() {
-    let mut app = Application::new(|state, window| {});
+    let app = Application::new(|state, window| {
+        
+        window.set_title(&quot;Custom Title&quot;).set_inner_size(300,300);
+
+        // Add an Element widget
+        Element::new().build(state, window.entity(), |builder| builder);
+
+    });
 
     app.run();
 }
 </code></pre>
-<p>Currently the closure passed to <code>new()</code> is empty, but this is where we will build our application.</p>
-<p>Running this code with <code>cargo run</code> will produce an empty gray window with a width of 800 pixels and a height of 600 pixels. This isn't very interesting, so in the next section we'll cover changing window properties like size, title and icon.</p>
-<p>For now let's go over the two arguments provided by the closure:</p>
+<p>An <code>Element</code> widget is the simplest built-in widget that tuix has. It contains no data or event handling logic but can be styled like any other widget.</p>
+<p>To add the element widget we first create a new instance with <code>Element::new()</code>, and then build the widget into the app with <code>.build(state, window.entity(), |builder| builder)</code>. </p>
 <ul>
 <li>
-<p><code>state</code> - This is a mutable reference to the UI <code>State</code>, which represents the 'global' data of the widgets in a gui application, such as layout and style. A mutable reference to state is passed around when building widgets, handling events, and drawing widgets.</p>
+<p>The first argument,<code>state</code>, is a mutable reference to <code>State</code> from the application closure. </p>
 </li>
 <li>
-<p><code>window</code> - This is a mutable reference to a <code>WindowBuilder</code>. With this we can modify the window properties.</p>
+<p>The second argument is the entity id of the parent widget, in this case the window widget, which we get by calling <code>window.entity()</code>. Each widget has an <code>Entity</code> id which can be used to get and set various widget properties stored in <code>State</code>.</p>
+</li>
+<li>
+<p>The third argument is a closure which provides us with a builder we can use to set properties of the newly created widget.</p>
 </li>
 </ul>
+<p>However, if you build and run this code you will still see an empty window.</p>
+<p><img src="../../images/adding_widgets_01.png" alt="adding_widgets_01" /></p>
+<p>This is because the <code>Element</code> widget has no built-in styling. To see the element, we can add a width, height, and background color using the builder:</p>
+<pre><code class="language-rs">use tuix::*;
+
+fn main() {
+    let app = Application::new(|state, window| {
+        
+        window.set_title(&quot;Custom Title&quot;).set_inner_size(300,300);
+
+        Element::new().build(state, window.entity(), |builder| 
+            builder
+                .set_width(Units::Pixels(100.0))
+                .set_height(Units::Pixels(30.0))
+                .set_background_color(Color::rgb(200,80,20))
+        );
+
+    });
+
+    app.run();
+}
+</code></pre>
+<p>This will produce a nice orange widget in the top left corner of the window with a width of 100 pixels and a height of 30 pixels. In the next section we will look at how to compose widgets together by adding a button to our element widget.</p>
+<p><img src="../../images/adding_widgets_02.png" alt="adding_widgets_02" /></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="chapter_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
-                            <a rel="next" href="chapter_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="chapter_4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -204,9 +241,13 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="chapter_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
                 
-                    <a rel="next" href="chapter_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="chapter_4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

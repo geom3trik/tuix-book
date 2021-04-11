@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Creating an Application - Tuix Guide</title>
+        <title>Setting Window Properties - Tuix Guide</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Quick Start Guide</li><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Quick Start Guide</li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,36 +163,56 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="creating-a-tuix-application"><a class="header" href="#creating-a-tuix-application">Creating a Tuix Application</a></h1>
-<p>The most basic tuix app looks like this:</p>
-<pre><code class="language-rs">use tuix::*;
-
-fn main() {
-    let mut app = Application::new(|state, window| {});
-
-    app.run();
+                        <h1 id="setting-window-properties"><a class="header" href="#setting-window-properties">Setting Window Properties</a></h1>
+<p>Window properties can be set using the <code>WindowBuilder</code>, which is the second argument of the closure passed to <code>Application::new()</code>.</p>
+<pre><code class="language-rs">fn main() {
+    let app = Application::new(|state, window|{
+        window.set_title(&quot;Custom Title&quot;);
+    })
 }
 </code></pre>
-<p>Currently the closure passed to <code>new()</code> is empty, but this is where we will build our application.</p>
-<p>Running this code with <code>cargo run</code> will produce an empty gray window with a width of 800 pixels and a height of 600 pixels. This isn't very interesting, so in the next section we'll cover changing window properties like size, title and icon.</p>
-<p>For now let's go over the two arguments provided by the closure:</p>
-<ul>
-<li>
-<p><code>state</code> - This is a mutable reference to the UI <code>State</code>, which represents the 'global' data of the widgets in a gui application, such as layout and style. A mutable reference to state is passed around when building widgets, handling events, and drawing widgets.</p>
-</li>
-<li>
-<p><code>window</code> - This is a mutable reference to a <code>WindowBuilder</code>. With this we can modify the window properties.</p>
-</li>
-</ul>
+<p>Setting properties can also be chained together:</p>
+<pre><code class="language-rs">fn main() {
+    let app = Application::new(|state, window|{
+        window.set_title(&quot;Custom Title&quot;).set_inner_size(400,300);
+    })
+}
+</code></pre>
+<h2 id="list-of-window-properties"><a class="header" href="#list-of-window-properties">List of Window Properties</a></h2>
+<h4 id="window-title"><a class="header" href="#window-title">Window Title</a></h4>
+<p>Sets the title of the window.</p>
+<pre><code class="language-rs">set_title(title: &amp;str)
+</code></pre>
+<h4 id="window-inner-size"><a class="header" href="#window-inner-size">Window Inner Size</a></h4>
+<p>Sets the inner size of the window.</p>
+<pre><code class="language-rs">set_inner_size(width: u32, height: u32)
+</code></pre>
+<h4 id="window-inner-size-1"><a class="header" href="#window-inner-size-1">Window Inner Size</a></h4>
+<p>Sets the minimum inner size of the window.</p>
+<pre><code class="language-rs">set_min_inner_size(width: u32, height: u32)
+</code></pre>
+<h4 id="window-icon"><a class="header" href="#window-icon">Window Icon</a></h4>
+<p>Sets the window icon.</p>
+<pre><code class="language-rs">set_icon(&amp;mut self, icon: Vec&lt;u8&gt;, width: u32, height: u32)
+</code></pre>
+<p>The icon must first be loaded using the image crate. Example:</p>
+<pre><code class="language-rs">let icon = image::open(&quot;resources/icons/calculator_dark-128.png&quot;).unwrap();
+
+window.set_icon(icon.to_bytes(), icon.width(), icon.height());
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
-                            <a rel="next" href="chapter_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="chapter_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -204,9 +224,13 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
                 
-                    <a rel="next" href="chapter_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="chapter_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
