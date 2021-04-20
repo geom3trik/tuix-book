@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Quick Start Guide</li><li class="chapter-item expanded "><a href="section_1_quick_start/chapter_1.html"><strong aria-hidden="true">1.</strong> Creating an Application</a></li><li class="chapter-item expanded "><a href="section_1_quick_start/chapter_2.html"><strong aria-hidden="true">2.</strong> Setting Window Properties</a></li><li class="chapter-item expanded "><a href="section_1_quick_start/chapter_3.html"><strong aria-hidden="true">3.</strong> Adding a Widget</a></li><li class="chapter-item expanded "><a href="section_1_quick_start/chapter_4.html"><strong aria-hidden="true">4.</strong> Composing Widgets</a></li><li class="chapter-item expanded "><a href="section_1_quick_start/chapter_5.html"><strong aria-hidden="true">5.</strong> Widget Layout</a></li><li class="chapter-item expanded "><a href="section_1_quick_start/chapter_6.html"><strong aria-hidden="true">6.</strong> Widget Styling</a></li><li class="chapter-item expanded "><a href="section_1_quick_start/chapter_7.html"><strong aria-hidden="true">7.</strong> Handling Events</a></li><li class="chapter-item expanded affix "><li class="part-title">Layout</li><li class="chapter-item expanded "><a href="section_2_layout/chapter_1.html"><strong aria-hidden="true">8.</strong> Overview (Stack)</a></li><li class="chapter-item expanded "><a href="section_2_layout/chapter_3.html"><strong aria-hidden="true">9.</strong> Child Properies</a></li><li class="chapter-item expanded "><a href="section_2_layout/chapter_4.html"><strong aria-hidden="true">10.</strong> Parent Properies</a></li><li class="chapter-item expanded "><a href="section_2_layout/chapter_2.html"><strong aria-hidden="true">11.</strong> Overview (Grid)</a></li><li class="chapter-item expanded "><a href="section_2_layout/chapter_5.html"><strong aria-hidden="true">12.</strong> Positioning Text</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -254,7 +254,7 @@ fn main() {
 </li>
 </ul>
 <p>However, if you build and run this code you will still see an empty window.</p>
-<p><img src="images/adding_widgets_01.png" alt="adding_widgets_01" /></p>
+<p><img src="section_1_quick_start/../images/adding_widgets_01.png" alt="adding_widgets_01" /></p>
 <p>This is because the <code>Element</code> widget has no built-in styling. To see the element, we can add a width, height, and background color using the builder:</p>
 <pre><code class="language-rs">use tuix::*;
 
@@ -276,7 +276,7 @@ fn main() {
 }
 </code></pre>
 <p>This will produce a nice orange widget in the top left corner of the window with a width of 100 pixels and a height of 30 pixels. In the next section we will look at how to compose widgets together by adding a button to our element widget.</p>
-<p><img src="images/adding_widgets_02.png" alt="adding_widgets_02" /></p>
+<p><img src="section_1_quick_start/../images/adding_widgets_02.png" alt="adding_widgets_02" /></p>
 <h1 id="composing-widgets"><a class="header" href="#composing-widgets">Composing Widgets</a></h1>
 <p>To demonstrate the composition of widgets, let's add a <code>Button</code> widget to the <code>Element</code> widget we have from before:</p>
 <pre><code class="language-rs">use tuix::*;
@@ -309,12 +309,12 @@ fn main() {
 <p>Building the button widget works in the same way as the element widget. However, notice that the building of the element is now bound to a <code>container</code> variable. This is the <code>Entity</code> id of the element widget and is returned by the <code>.build(...)</code> function.</p>
 <p>This id is then used to specify the element widget as the parent of the button widget in the button's <code>.build(...)</code> function. The button widget style properties are also different to the element widget to help distinguish them. </p>
 <p>Running this code produces:</p>
-<p><img src="images/composing_widgets_01.png" alt="adding_widgets_01" /></p>
+<p><img src="section_1_quick_start/../images/composing_widgets_01.png" alt="adding_widgets_01" /></p>
 <p>Composing widgets forms a tree, where each widget has a single parent and zero or more children. In tuix this tree is called the <code>Hierarchy</code>, and can be found in <code>State</code>. This hierarchy is used to propagate events as well as to draw the elements in the correct order.</p>
 <p>We will cover the <code>Hierarchy</code> in more detail when we start to handle events and custom drawing a little later. In the next section we'll cover the basics of widget layout.</p>
 <h1 id="widget-layout"><a class="header" href="#widget-layout">Widget Layout</a></h1>
 <p>Tuix uses the layout properties defined on widgets to position them within the window and to determine their size.</p>
-<p>To keep the quick start guide short, we will skip over the details of tuix's layout system. The layout system in tuix is quite comprehensive, and a more detailed guide can be found in the <a href="">layout section</a>.</p>
+<p>To keep the quick start guide short, we will skip over the details of tuix's layout system. The layout system in tuix is quite comprehensive, and a more detailed guide can be found in the <a href="section_1_quick_start/">layout section</a>.</p>
 <p>Now, so far we have defined a width and a height for our widgets so now we will position them. The following example positions the element in the center of the window:</p>
 <pre><code class="language-rs">use tuix::*;
 
@@ -349,11 +349,11 @@ fn main() {
     app.run();
 }
 </code></pre>
-<p><img src="images/widget_layout_01.png" alt="widget_layout_01" /></p>
+<p><img src="section_1_quick_start/../images/widget_layout_01.png" alt="widget_layout_01" /></p>
 <p>We add space to each side of the element with units of <code>Stretch(1.0)</code>. Note, we could have also used <code>set_space()</code> to apply the same spacing to all sides. Looking at the horizontal axis, because both <code>left</code> and <code>right</code> are set to stretch, the layout algorithm splits the free space between them, resulting in equal space either side of the element. The same is done for the verical axis, resulting in a centered element.</p>
 <p>Notice also that the button has moved, remaining in the top left corner of the element. This is because widgets are positioned relative to their parents.</p>
 <h1 id="widget-styling"><a class="header" href="#widget-styling">Widget Styling</a></h1>
-<p>As with layout, this quick start guide does not aim to cover all of the intricacies of styling and the properties available. A more comprehensive guide can be found in the <a href="">styling section</a>.</p>
+<p>As with layout, this quick start guide does not aim to cover all of the intricacies of styling and the properties available. A more comprehensive guide can be found in the <a href="section_1_quick_start/">styling section</a>.</p>
 <h2 id="inline-and-shared-styling"><a class="header" href="#inline-and-shared-styling">Inline and Shared Styling</a></h2>
 <p>So far we have defined our style properties directly on the widgets using the builder, also known as <em>inline</em> styling. Tuix also offers the ability to define style rules to allow <em>shared</em> styling between multiple widgets. The widgets affected by these shared style rules are determined by <em>selectors</em> which should be familiar to web developers using css and work in the same way.</p>
 <p>The following code defines a style rule which acts on any widgets with a class name of <code>&quot;my_class&quot;</code>, and also gives this class name to our two widgets:</p>
@@ -404,8 +404,166 @@ fn main() {
 }
 </code></pre>
 <p>Note that the style rule has to be added to the app using <code>state.add_style_rule()</code>. Note also that <em>inline</em> properties override <em>shared</em> properties, so although both widgets are affected by the shared style, the button keeps its blue color as it comes from an inline style rule. The height property, on the other hand, is shared between the two widgets. Below is the output of this code:</p>
-<p><img src="images/widget_styling_01.png" alt="widget_styling_01" /></p>
+<p><img src="section_1_quick_start/../images/widget_styling_01.png" alt="widget_styling_01" /></p>
 <h1 id="handling-events"><a class="header" href="#handling-events">Handling Events</a></h1>
+<h1 id="overview-stack"><a class="header" href="#overview-stack">Overview (Stack)</a></h1>
+<p>An overview of the layout system for working with stacks, in which child elements are positioned one after another.</p>
+<ol>
+<li>For stacking, a parent element arranges its children into a vertical stack (<code>layout-type: column</code>) or a horizontal stack (<code>layout-type: row</code>).</li>
+</ol>
+<p><img src="section_2_layout/../images/layout_type3.png" alt="layout_type" /></p>
+<ol start="2">
+<li>A child element can be positioned by adding space to the <code>left</code>, <code>right</code>, <code>top</code>, or <code>bottom</code> of an element.</li>
+</ol>
+<p><img src="section_2_layout/../images/spacing3.png" alt="spacing" /></p>
+<ol start="3">
+<li>A child element is positioned relative to its stack position (<code>position-type: parent-directed</code>), or relative to the top-left of its parent (<code>position-type: self-directed</code>).</li>
+</ol>
+<p><img src="section_2_layout/../images/position_type.png" alt="position_type" /></p>
+<ol start="4">
+<li>Spacing can be expressed in pixels, percentage, stretch, or auto (see 8). Stretch causes the spacing to be flexible, occupying a proportion of the remaining free space. By default, spacing is set to auto.</li>
+</ol>
+<p><img src="section_2_layout/../images/position3.png" alt="spacing_units" /></p>
+<ol start="5">
+<li>The size of an element is determined by its <code>width</code> and <code>height</code>, which can also be expressed in pixels, percentage, stretch and auto. By default, size is set to stretch.</li>
+</ol>
+<p><img src="section_2_layout/../images/size3.png" alt="size_units" /></p>
+<ol start="6">
+<li>When size is set to auto, an element will 'hug' its children in that axis. This is also true for <code>min-width</code>/<code>min-height</code> (see 10).</li>
+</ol>
+<p><img src="section_2_layout/../images/auto_size.png" alt="auto_size" /></p>
+<ol start="7">
+<li>A parent can add space around its stacked children with <code>child-space</code>, or specified individually with <code>child-left</code>, <code>child-right</code>, <code>child-top</code>, <code>child-bottom</code>, or add space between its child elements with <code>child-between</code>.</li>
+</ol>
+<p><img src="section_2_layout/../images/child_spacing.png" alt="child_spacing" /></p>
+<ol start="8">
+<li>Child spacing applies to elements with spacing set to auto.</li>
+</ol>
+<p><img src="section_2_layout/../images/auto_spacing.png" alt="auto_spacing" /></p>
+<ol start="9">
+<li>Spacing set in pixels, percentage, or stretch overrides child spacing.</li>
+</ol>
+<p><img src="section_2_layout/../images/spacing_override.png" alt="spacing_override" /></p>
+<ol start="10">
+<li>All spacing and size properties have corresponding minimum and maximum constraint properties. For example, for <code>left</code> there is <code>min-left</code> and <code>max-left</code>. By default spacing and size minimums and maximums are set to auto. This will cause elements to <code>hug</code> their children if the size if flexible and goes below the minimum.</li>
+</ol>
+<h1 id="child-properies-todo"><a class="header" href="#child-properies-todo">Child Properies (TODO)</a></h1>
+<h2 id="position-type"><a class="header" href="#position-type">Position Type</a></h2>
+<p>This determines how an element will be positioned within its parent relative to other child elements.</p>
+<ul>
+<li><strong>self-directed</strong> - The element determines its own position, relative to the top-left corner of the parent, and is not affected by other elements in a stack or grid.</li>
+<li><strong>parent-directed</strong> (default) - The element is positioned by the parent into a stack or grid.</li>
+</ul>
+<h2 id="spacing"><a class="header" href="#spacing">Spacing</a></h2>
+<p>There are four spacing properties that are used to specify the position an element within its parent:</p>
+<ol>
+<li>left - determines the space to the left of an element.</li>
+<li>right - determines the space to the right of an element.</li>
+<li>top - determines the space above an element.</li>
+<li>bottom - determines the space below an element.</li>
+</ol>
+<p>The spacing properties behave somewhat like margins, adding space around an element. </p>
+<h2 id="size"><a class="header" href="#size">Size</a></h2>
+<p>The size of an element is determined by two properties:</p>
+<ol>
+<li>width - determines the width of an element.</li>
+<li>height - determines the height of an element.</li>
+</ol>
+<p>Like with all spacing and size properties, the value can be expressed in pixels, percentage, stretch, and auto.</p>
+<p><strong>Pixels</strong></p>
+<h1 id="parent-properies-todo"><a class="header" href="#parent-properies-todo">Parent Properies (TODO)</a></h1>
+<h2 id="layout-type"><a class="header" href="#layout-type">Layout Type</a></h2>
+<p><strong>Rust</strong></p>
+<pre><code class="language-rs">enum LayoutType {
+    Row,
+    Column,
+    Grid,
+}
+</code></pre>
+<p><strong>Stylesheet:</strong></p>
+<pre><code class="language-css">.container {
+    layout-type: row | column | grid;
+}
+</code></pre>
+<p>This determines how the child elements should be arranged in the parent.</p>
+<ul>
+<li><strong>Row</strong> - Child elements are arranged into a horizontal stack from left to right</li>
+<li><strong>Column</strong> - Child elements are arranged into a vertical stack from top to bottom</li>
+<li><strong>Grid</strong> - Child elements are arranged into a grid (link here)</li>
+</ul>
+<h2 id="child-space"><a class="header" href="#child-space">Child-Space</a></h2>
+<p>This determines the spacing around the elements in a stack (does not apply to grid). </p>
+<p>Each of the child spacing properties (see below), defined on the parent, acts to override the auto-spaced properties of the child elements. For example, the parent <code>child-left</code> property will override the <code>left</code> property of a child element if the <code>left</code> property is set to <code>Units::Auto</code>.</p>
+<p>There are five child-space properties:</p>
+<ol>
+<li><strong>child-left</strong> - determines the space to the left of the stack. Applies to the <em>first</em> element in a horizontal stack and <em>all</em> elements in a vertical stack.</li>
+<li><strong>child-right</strong> - determines the space to the right of the stack. Applies to the <em>last</em> element in a horizontal stack and <em>all</em> elements in a vertical stack.</li>
+<li><strong>child-top</strong> - determines the space to the top of the stack. Applies to the <em>first</em> element in a vertical stack and <em>all</em> elements in a horizontal stack.</li>
+<li><strong>child-bottom</strong> - determines the space to the top of the stack. Applies to the <em>last</em> element in a vertical stack and <em>all</em> elements in a horizontal stack.</li>
+<li><strong>child-between</strong> - determines the space between elements on the main axis. Applies to all elements except the first and last and acts to override child <code>left</code> and <code>right</code> spacing.</li>
+</ol>
+<p>With these child spacing properties it is possible to do a number of alignment configurations:</p>
+<h4 id="align-left"><a class="header" href="#align-left">Align Left</a></h4>
+<pre><code class="language-css">.container {
+    child-left: 0px;
+    child-right: 1s;
+}
+</code></pre>
+<h4 id="align-center"><a class="header" href="#align-center">Align Center</a></h4>
+<pre><code class="language-css">.container {
+    child-left: 1s;
+    child-right: 1s;
+}
+</code></pre>
+<h4 id="align-right"><a class="header" href="#align-right">Align Right</a></h4>
+<pre><code class="language-css">.container {
+    child-left: 1s;
+    child-right: 0px;
+}
+</code></pre>
+<h4 id="align-top"><a class="header" href="#align-top">Align Top</a></h4>
+<pre><code class="language-css">.container {
+    child-top: 0px;
+    child-bottom: 1s;
+}
+</code></pre>
+<h4 id="align-middle"><a class="header" href="#align-middle">Align Middle</a></h4>
+<pre><code class="language-css">.container {
+    child-top: 1s;
+    child-bottom: 1s;
+}
+</code></pre>
+<h4 id="align-bottom"><a class="header" href="#align-bottom">Align Bottom</a></h4>
+<pre><code class="language-css">.container {
+    child-top: 1s;
+    child-bottom: 0px;
+}
+</code></pre>
+<h4 id="space-between"><a class="header" href="#space-between">Space Between</a></h4>
+<pre><code class="language-css">.container {
+    child-between: 1s;
+}
+</code></pre>
+<h4 id="space-evenly-row"><a class="header" href="#space-evenly-row">Space Evenly (Row)</a></h4>
+<pre><code class="language-css">.container {
+    child-left: 1s;
+    child-right: 1s;
+    child-between: 1s;
+}
+</code></pre>
+<h1 id="overview-grid"><a class="header" href="#overview-grid">Overview (Grid)</a></h1>
+<!-- - **Axis** - refers to either horizontal (row) or vertical (column) directions. Left and right apply to the horizontal axis while top and bottom apply to the vertical axis.
+- **Stack** - elements arranged within a parent one after another along an axis.
+
+## Units
+
+All spacing and size properties use the same `Units` enum, which has four variants:
+
+1. **Pixels** - specifies a length pixels
+2. **Percentage** - specifies a length as a percentage of the parent length in the same axis (e.g. percentage `left` would be a perctange of the parent width)
+3. **Stretch** - specifies the length as a proportion of the free space available.
+4. **Auto** - specifies that the length should be automatically determined. This variant has different behaviour depending on the property. -->
+<h1 id="positioning-text-todo"><a class="header" href="#positioning-text-todo">Positioning Text (TODO)</a></h1>
 
                     </main>
 
