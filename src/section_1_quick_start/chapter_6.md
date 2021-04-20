@@ -58,4 +58,4 @@ fn main() {
 
 Note that the style rule has to be added to the app using `state.add_style_rule()`. Note also that *inline* properties override *shared* properties, so although both widgets are affected by the shared style, the button keeps its blue color as it comes from an inline style rule. The height property, on the other hand, is shared between the two widgets. Below is the output of this code:
 
-![widget_styling_01](images/widget_styling_01.png)
+![widget_styling_01](../images/widget_styling_01.png)

@@ -30,7 +30,7 @@ To add the element widget we first create a new instance with `Element::new()`, 
 
 However, if you build and run this code you will still see an empty window.
 
-![adding_widgets_01](images/adding_widgets_01.png)
+![adding_widgets_01](../images/adding_widgets_01.png)
 
 This is because the `Element` widget has no built-in styling. To see the element, we can add a width, height, and background color using the builder:
 
@@ -57,4 +57,4 @@ fn main() {
 
 This will produce a nice orange widget in the top left corner of the window with a width of 100 pixels and a height of 30 pixels. In the next section we will look at how to compose widgets together by adding a button to our element widget.
 
-![adding_widgets_02](images/adding_widgets_02.png)
+![adding_widgets_02](../images/adding_widgets_02.png)
