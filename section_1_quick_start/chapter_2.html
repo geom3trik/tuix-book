@@ -136,13 +136,15 @@
                         </a>
                         
                         
+                        
+
                     </div>
                 </div>
 
                 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -166,39 +168,41 @@
                         <h1 id="setting-window-properties"><a class="header" href="#setting-window-properties">Setting Window Properties</a></h1>
 <p>Window properties can be set using the <code>WindowBuilder</code>, which is the second argument of the closure passed to <code>Application::new()</code>.</p>
 <pre><code class="language-rs">fn main() {
-    let app = Application::new(|state, window|{
-        window.set_title(&quot;Custom Title&quot;);
-    })
+    let app = Application::new(
+        WindowDescription::new().with_title(&quot;Custom Title&quot;), 
+        |state, window|{}
+    );
 }
 </code></pre>
-<p>Setting properties can also be chained together:</p>
+<p>Using the builder pattern, setting window properties can be chained together:</p>
 <pre><code class="language-rs">fn main() {
-    let app = Application::new(|state, window|{
-        window.set_title(&quot;Custom Title&quot;).set_inner_size(400,300);
-    })
+    let app = Application::new(
+        WindowDescription::new().with_title(&quot;Custom Title&quot;).with_inner_size(300, 300),
+        |state, window|{}
+    );
 }
 </code></pre>
 <h2 id="list-of-window-properties"><a class="header" href="#list-of-window-properties">List of Window Properties</a></h2>
 <h4 id="window-title"><a class="header" href="#window-title">Window Title</a></h4>
 <p>Sets the title of the window.</p>
-<pre><code class="language-rs">set_title(title: &amp;str)
+<pre><code class="language-rs">with_title(title: &amp;str)
 </code></pre>
 <h4 id="window-inner-size"><a class="header" href="#window-inner-size">Window Inner Size</a></h4>
 <p>Sets the inner size of the window.</p>
-<pre><code class="language-rs">set_inner_size(width: u32, height: u32)
+<pre><code class="language-rs">with_inner_size(width: u32, height: u32)
 </code></pre>
 <h4 id="window-inner-size-1"><a class="header" href="#window-inner-size-1">Window Inner Size</a></h4>
 <p>Sets the minimum inner size of the window.</p>
-<pre><code class="language-rs">set_min_inner_size(width: u32, height: u32)
+<pre><code class="language-rs">with_min_inner_size(width: u32, height: u32)
 </code></pre>
 <h4 id="window-icon"><a class="header" href="#window-icon">Window Icon</a></h4>
 <p>Sets the window icon.</p>
-<pre><code class="language-rs">set_icon(&amp;mut self, icon: Vec&lt;u8&gt;, width: u32, height: u32)
+<pre><code class="language-rs">with_icon(&amp;mut self, icon: Vec&lt;u8&gt;, width: u32, height: u32)
 </code></pre>
 <p>The icon must first be loaded using the image crate. Example:</p>
 <pre><code class="language-rs">let icon = image::open(&quot;resources/icons/calculator_dark-128.png&quot;).unwrap();
 
-window.set_icon(icon.to_bytes(), icon.width(), icon.height());
+.with_icon(icon.to_bytes(), icon.width(), icon.height());
 </code></pre>
 
                     </main>

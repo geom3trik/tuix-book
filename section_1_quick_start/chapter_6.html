@@ -136,13 +136,15 @@
                         </a>
                         
                         
+                        
+
                     </div>
                 </div>
 
                 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -216,6 +218,55 @@ fn main() {
 </code></pre>
 <p>Note that the style rule has to be added to the app using <code>state.add_style_rule()</code>. Note also that <em>inline</em> properties override <em>shared</em> properties, so although both widgets are affected by the shared style, the button keeps its blue color as it comes from an inline style rule. The height property, on the other hand, is shared between the two widgets. Below is the output of this code:</p>
 <p><img src="../images/widget_styling_01.png" alt="widget_styling_01" /></p>
+<h2 id="stylesheets"><a class="header" href="#stylesheets">Stylesheets</a></h2>
+<p>Tuix also offers the ability to define styles in separate stylesheet files with .css extensions. However, although some of the style properties available in tuix share the same name as css properties, in general the available style properties are different.</p>
+<p>We can produce the same shared style as before with the following code in a separate 'theme.css' file:</p>
+<pre><code class="language-css">.my_class {
+    height: 30px;
+    background-color: #50c814;
+}
+</code></pre>
+<p>This file can then be included in the binary with the <code>include_str!</code> macro added to the application with <code>state.add_theme()</code> like so:</p>
+<pre><code class="language-rs">use tuix::*;
+
+const THEME: &amp;str = include_str!(&quot;path_to_stylesheet/theme.css&quot;);
+
+fn main() {
+    let window_description = WindowDescription::new().with_title(&quot;Custom Title&quot;).set_inner_size(300,300);
+    let app = Application::new(window_description, |state, window| {
+        
+        // Add external stylehseet to the application
+        state.add_theme(THEME);
+
+        let container = Element::new().build(state, window.entity(), |builder| 
+            builder
+                .set_width(Pixels(100.0))
+                .set_space_left(Stretch(1.0))
+                .set_space_right(Stretch(1.0))
+                .set_space_top(Stretch(1.0))
+                .set_space_bottom(Stretch(1.0))
+                .set_background_color(Color::rgb(20,80,200))
+
+                // Add a class name &quot;my_class&quot;
+                .class(&quot;my_class&quot;)
+
+
+        );
+
+        Button::new().build(state, container, |builder| 
+            builder
+                .set_width(Pixels(30.0))
+
+                // Add a class name &quot;my_class&quot;
+                .class(&quot;my_class&quot;)
+        );
+
+    });
+
+    app.run();
+}
+</code></pre>
+<p>Alternatively, <code>state.add_stylesheet()</code> can be used to  </p>
 
                     </main>
 

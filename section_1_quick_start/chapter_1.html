@@ -136,13 +136,15 @@
                         </a>
                         
                         
+                        
+
                     </div>
                 </div>
 
                 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -168,22 +170,22 @@
 <pre><code class="language-rs">use tuix::*;
 
 fn main() {
-    let mut app = Application::new(|state, window| {});
+    let mut app = Application::new(WindowDescription::new(), |state, window| {});
 
     app.run();
 }
 </code></pre>
-<p>Currently the closure passed to <code>new()</code> is empty, but this is where we will build our application.</p>
-<p>Running this code with <code>cargo run</code> will produce an empty gray window with a width of 800 pixels and a height of 600 pixels. This isn't very interesting, so in the next section we'll cover changing window properties like size, title and icon.</p>
-<p>For now let's go over the two arguments provided by the closure:</p>
-<ul>
+<p>The first argument passed to <code>Application::new()</code> is a new instance of a <code>WindowBuilder</code>. This allows us to set the initial properties of the root window created for us by tuix. </p>
+<p>The second argument passed to the new method is a closure which provides us with two variables:</p>
+<ol>
 <li>
 <p><code>state</code> - This is a mutable reference to the UI <code>State</code>, which represents the 'global' data of the widgets in a gui application, such as layout and style. A mutable reference to state is passed around when building widgets, handling events, and drawing widgets.</p>
 </li>
 <li>
-<p><code>window</code> - This is a mutable reference to a <code>WindowBuilder</code>. With this we can modify the window properties.</p>
+<p><code>window</code> - This is an <code>Entity</code> id to the window widget created for us by tuix. Every widget has an entity id which is used with state to modify UI properties.</p>
 </li>
-</ul>
+</ol>
+<p>Running this code with <code>cargo run</code> will produce an empty gray window with a width of 800 pixels and a height of 600 pixels. This isn't very interesting, so in the next section we'll cover changing window properties like size, title and icon.</p>
 
                     </main>
 
