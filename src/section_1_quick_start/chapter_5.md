@@ -2,7 +2,7 @@
 
 Tuix uses the layout properties defined on widgets to position them within the window and to determine their size.
 
-To keep the quick start guide short, we will skip over the details of tuix's layout system. The layout system in tuix is quite comprehensive, and a more detailed guide can be found in the [layout section]().
+To keep the quick start guide short, we will skip over the details of tuix's layout system. The layout system in tuix is quite comprehensive, and a more detailed guide can be found in the [layout section](https://geom3trik.github.io/tuix-book/section_2_layout/chapter_1.html).
 
 Now, so far we have defined a width and a height for our widgets so now we will position them. The following example positions the element in the center of the window:
 

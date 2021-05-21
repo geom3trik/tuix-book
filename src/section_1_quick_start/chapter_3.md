@@ -6,17 +6,19 @@ We can add a simple widget to our application like so:
 use tuix::*;
 
 fn main() {
-    let app = Application::new(|state, window| {
-        
-        window.set_title("Custom Title").set_inner_size(300,300);
-
-        // Add an Element widget
-        Element::new().build(state, window.entity(), |builder| builder);
-
-    });
+    let app = Application::new(
+        WindowDescription::new()
+            .with_title("Custom Title")
+            .with_inner_size(300, 300),
+        |state, window| {
+            // Add an Element widget
+            Element::new().build(state, window.entity(), |builder| builder);
+        },
+    );
 
     app.run();
 }
+
 ```
 An `Element` widget is the simplest built-in widget that tuix has. It contains no data or event handling logic but can be styled like any other widget.
 
@@ -38,18 +40,21 @@ This is because the `Element` widget has no built-in styling. To see the element
 use tuix::*;
 
 fn main() {
-    let app = Application::new(|state, window| {
+    let app = Application::new(
+        WindowDescription::new()
+            .with_title("Custom Title")
+            .with_inner_size(300, 300),
+        |state, window| {
+            
+            Element::new().build(state, window.entity(), |builder| {
+                builder
+                    .set_width(Pixels(100.0))
+                    .set_height(Pixels(30.0))
+                    .set_background_color(Color::rgb(200, 80, 20))
+            });
         
-        window.set_title("Custom Title").set_inner_size(300,300);
-
-        Element::new().build(state, window.entity(), |builder| 
-            builder
-                .set_width(Units::Pixels(100.0))
-                .set_height(Units::Pixels(30.0))
-                .set_background_color(Color::rgb(200,80,20))
-        );
-
-    });
+        },
+    );
 
     app.run();
 }
