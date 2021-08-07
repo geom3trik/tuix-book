@@ -6,10 +6,11 @@ To demonstrate the composition of widgets, let's add a `Button` widget to the `E
 use tuix::*;
 
 fn main() {
-    let app = Application::new(|state, window| {
+    let window_description = WindowDescription::new()
+        .with_title("Custom Title")
+        .with_inner_size(300, 300);
+    let app = Application::new(window_description, |state, window| {
         
-        window.set_title("Custom Title").set_inner_size(300,300);
-
         let container = Element::new().build(state, window.entity(), |builder| 
             builder
                 .set_width(Pixels(100.0))

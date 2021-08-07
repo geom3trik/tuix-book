@@ -11,13 +11,13 @@ The following code defines a style rule which acts on any widgets with a class n
 ```rs
 use tuix::*;
 
-
-
 fn main() {
-    let app = Application::new(|state, window| {
-        
-        window.set_title("Custom Title").set_inner_size(300,300);
+    let window_description = WindowDescription::new()
+        .with_title("Custom Title")
+        .with_inner_size(300, 300);
 
+    let app = Application::new(window_description, |state, window| {
+    
         // Create a shared style wich applies to all widgets with class name "my_class"
         let style_rule: StyleRule = StyleRule::new()
             .selector(Selector::new().class("my_class"))
@@ -38,8 +38,6 @@ fn main() {
 
                 // Add a class name "my_class"
                 .class("my_class")
-
-
         );
 
         Button::new().build(state, container, |builder| 
@@ -73,7 +71,7 @@ We can produce the same shared style as before with the following code in a sepa
 }
 ```
 
-This file can then be included in the binary with the `include_str!` macro added to the application with `state.add_theme()` like so:
+This file can then be included in the binary with the `include_str!` macro and then added to the application with `state.add_theme()` like so:
 
 ```rs
 use tuix::*;
@@ -116,4 +114,4 @@ fn main() {
 }
 ```
 
-Alternatively, `state.add_stylesheet()` can be used to  
+Alternatively, `state.add_stylesheet()` can be used to add a stylesheet dynamically by specifying the path to the css file. This allows for hot reloading of the stylesheet using the F5 key, however, the css file must be shipped with the executable.

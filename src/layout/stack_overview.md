@@ -3,17 +3,17 @@
 
 An overview of the layout system for working with stacks, in which child elements are positioned one after another.
 
-1. For stacking, a parent element arranges its children into a vertical stack (`layout-type: column`) or a horizontal stack (`layout-type: row`).
+1. For stacking, a parent element can arrange its children into a vertical stack (`layout-type: column`) or a horizontal stack (`layout-type: row`).
 
 ![layout_type](../images/layout_type3.png)
 
-2. A child element can be positioned by adding space to the `left`, `right`, `top`, or `bottom` of an element.
-
-![spacing](../images/spacing3.png)
-
-3. A child element is positioned relative to its stack position (`position-type: parent-directed`), or relative to the top-left of its parent (`position-type: self-directed`).
+2. A child element is positioned relative to its stack position (`position-type: parent-directed`), or relative to the top-left of its parent (`position-type: self-directed`).
 
 ![position_type](../images/position_type.png)
+
+3. A child element can be positioned by adding space to the `left`, `right`, `top`, or `bottom` of an element.
+
+![spacing](../images/spacing3.png)
 
 4. Spacing can be expressed in pixels, percentage, stretch, or auto (see 8). Stretch causes the spacing to be flexible, occupying a proportion of the remaining free space. By default, spacing is set to auto.
 

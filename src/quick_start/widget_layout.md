@@ -10,9 +10,12 @@ Now, so far we have defined a width and a height for our widgets so now we will 
 use tuix::*;
 
 fn main() {
-    let app = Application::new(|state, window| {
-        
-        window.set_title("Custom Title").set_inner_size(300,300);
+
+    let window_description = WindowDescription::new()
+            .with_title("Custom Title")
+            .with_inner_size(300, 300);
+
+    let app = Application::new(window_description, |state, window| {
 
         let container = Element::new().build(state, window.entity(), |builder| 
             builder

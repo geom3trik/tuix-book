@@ -6,11 +6,11 @@ We can add a simple widget to our application like so:
 use tuix::*;
 
 fn main() {
-    let app = Application::new(
-        WindowDescription::new()
-            .with_title("Custom Title")
-            .with_inner_size(300, 300),
-        |state, window| {
+    let window_description = WindowDescription::new()
+        .with_title("Custom Title")
+        .with_inner_size(300, 300);
+    let app = Application::new(|state, window| {
+            
             // Add an Element widget
             Element::new().build(state, window.entity(), |builder| builder);
         },
@@ -40,11 +40,10 @@ This is because the `Element` widget has no built-in styling. To see the element
 use tuix::*;
 
 fn main() {
-    let app = Application::new(
-        WindowDescription::new()
-            .with_title("Custom Title")
-            .with_inner_size(300, 300),
-        |state, window| {
+    let window_description = WindowDescription::new()
+        .with_title("Custom Title")
+        .with_inner_size(300, 300);
+    let app = Application::new(window_description, |state, window| {
             
             Element::new().build(state, window.entity(), |builder| {
                 builder
