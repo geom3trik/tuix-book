@@ -37,6 +37,7 @@
 - [Border](./styling/border.md)
 - [Shadows](./styling/shadows.md)
 
-## Styling
-
-## Events
+# Bindng
+- [Introduction](./binding/intro.md)
+- [Model](./binding/model.md)
+- [Lens](./binding/lens.md)
