@@ -42,9 +42,9 @@ jobs:
       run: mdbook build
       env:
         MDBOOK_output__html__site_url: "/tuix-book/"
-
-    - name: Run tests
-      run: mdbook test
+# Tests run locally due to dependency on tuix
+#     - name: Run tests
+#       run: mdbook test
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.0
