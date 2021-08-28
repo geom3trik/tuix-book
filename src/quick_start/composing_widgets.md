@@ -1,29 +1,41 @@
 # Composing Widgets
 
-To demonstrate the composition of widgets, let's add a `Button` widget to the `Element` widget we have from before:
+So far our counter has only a single button. Let's add another button and a label, as well as a `Row` widget to be the parent of all three:
 
-```rs
+```rust
+extern crate tuix;
 use tuix::*;
 
 fn main() {
     let window_description = WindowDescription::new()
-        .with_title("Custom Title")
-        .with_inner_size(300, 300);
+        .with_title("Counter")
+        .with_inner_size(400, 100);
     let app = Application::new(window_description, |state, window| {
         
-        let container = Element::new().build(state, window.entity(), |builder| 
+        let row = Row::new().build(state, window, |builder| builder);
+
+        Button::with_label("Decrement").build(state, row, |builder| 
             builder
                 .set_width(Pixels(100.0))
                 .set_height(Pixels(30.0))
-                .set_background_color(Color::rgb(200,80,20))
+                .set_background_color(Color::rgb(20,80,200))
+                .set_space(Stretch(1.0))
         );
 
-        // Add a Button widget as a child of the Element widget
-        Button::new().build(state, container, |builder| 
+        Button::with_label("Increment").build(state, row, |builder| 
             builder
-                .set_width(Pixels(30.0))
+                .set_width(Pixels(100.0))
                 .set_height(Pixels(30.0))
                 .set_background_color(Color::rgb(20,80,200))
+                .set_space(Stretch(1.0))
+        );
+
+        Label::new("0").build(state, row, |builder| 
+            builder
+                .set_width(Pixels(100.0))
+                .set_height(Pixels(30.0))
+                .set_background_color(Color::rgb(50,50,50))
+                .set_space(Stretch(1.0))
         );
 
     });
@@ -32,14 +44,32 @@ fn main() {
 }
 ```
 
-Building the button widget works in the same way as the element widget. However, notice that the building of the element is now bound to a `container` variable. This is the `Entity` id of the element widget and is returned by the `.build(...)` function.
+Building the second button widget works in the same way as the first. However, notice that the building of both button now uses `row` as the parent. This is the `Entity` id of the `Row` widget instance and is returned by its `.build(...)` method, which is using `window` as its parent.
 
-This id is then used to specify the element widget as the parent of the button widget in the button's `.build(...)` function. The button widget style properties are also different to the element widget to help distinguish them. 
+This id is then used to specify the element widget as the parent of the button widget in the button's `.build(...)` method.
+
+Composing these widgets like this forms a tree, where each widget has a single parent and zero or more children. In tuix, this tree is used to propagate events as well as to draw the elements in the correct order.
 
 Running this code produces:
 
-![adding_widgets_01](../images/composing_widgets_01.png)
+<p align="center"><img src="../images/quick_guide/composing_widgets.png" alt="tuix app"></p>
 
-Composing widgets forms a tree, where each widget has a single parent and zero or more children. In tuix this tree is called the `Hierarchy`, and can be found in `State`. This hierarchy is used to propagate events as well as to draw the elements in the correct order.
+Woah! All our widgets are spaced out across the window! Can you see why?
 
-We will cover the `Hierarchy` in more detail when we start to handle events and custom drawing a little later. In the next section we'll cover the basics of widget layout.
+The default width and height of a widget, if not specified, is to stretch to fill the available space. So the `Row` widget has stretched to fill the window, although we can't see it directly because it has no background color.
+
+The buttons and label all have space around them set to stretch, which results in equal spacing between them, as well as centering them as a collection within the row.
+
+Let's remove the calls to `set_space` on each of the widgets and add two new methods on the builder for the row:
+
+```rs
+Row::new().build(state, window, |builder|
+    builder
+        .set_child_space(Stretch(1.0))
+        .set_col_between(Pixels(10.0))
+);
+```
+
+This sets the space around all of the children of the row (our buttons and label) to stretch, and also sets a fixed horizontal spacing between them of 10 pixels:
+
+<p align="center"><img src="../images/quick_guide/correctly_spaced.png" alt="tuix app"></p>

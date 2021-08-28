@@ -6,7 +6,8 @@ To keep the quick start guide short, we will skip over the details of tuix's lay
 
 Now, so far we have defined a width and a height for our widgets so now we will position them. The following example positions the element in the center of the window:
 
-```rs
+```rust
+extern crate tuix;
 use tuix::*;
 
 fn main() {
@@ -23,10 +24,10 @@ fn main() {
                 .set_height(Units::Pixels(30.0))
 
                 // Add stretch spacing to all sides of the element
-                .set_space_left(Stretch(1.0))
-                .set_space_right(Stretch(1.0))
-                .set_space_top(Stretch(1.0))
-                .set_space_bottom(Stretch(1.0))
+                .set_left(Stretch(1.0))
+                .set_right(Stretch(1.0))
+                .set_top(Stretch(1.0))
+                .set_bottom(Stretch(1.0))
 
                 .set_background_color(Color::rgb(200,80,20))
         );

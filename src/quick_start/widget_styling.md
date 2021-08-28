@@ -1,117 +1,184 @@
-# Widget Styling
 
-As with layout, this quick start guide does not aim to cover all of the intricacies of styling and the properties available. A more comprehensive guide can be found in the [styling section]().
+Our app now consists of two blue buttons and a gray label. Let's be honest, that doesn't look great and it doesn't feel like a GUI yet. The buttons don't even do anything when you hover and press them.
 
-## Inline and Shared Styling
+To fix this we will add style to our widgets. Tuix has two forms of styling:
+1. inline
+2. shared
 
-So far we have defined our style properties directly on the widgets using the builder, also known as *inline* styling. Tuix also offers the ability to define style rules to allow *shared* styling between multiple widgets. The widgets affected by these shared style rules are determined by *selectors* which should be familiar to web developers using css and work in the same way.
+So far we have defined our style properties directly on the widgets using the builder, also known as *inline* styling. Tuix also offers the ability to define style rules to allow *shared* styling between multiple widgets. The widgets affected by these shared style rules are determined by *selectors* which should be familiar to web developers using css and work in much the same way.
 
-The following code defines a style rule which acts on any widgets with a class name of `"my_class"`, and also gives this class name to our two widgets:
+Before we can add a shared style we need to give the widgets some class names, using the `.class()` method on the builder, so we can target them with selectors:
 
 ```rs
+Button::with_label("Decrement").build(state, row, |builder| 
+    builder
+        .set_width(Pixels(100.0))
+        .set_height(Pixels(30.0))
+        .set_background_color(Color::rgb(20,80,200))
+        .set_space(Stretch(1.0))
+        .class("decrement")
+);
+
+Button::with_label("Increment").build(state, row, |builder| 
+    builder
+        .set_width(Pixels(100.0))
+        .set_height(Pixels(30.0))
+        .set_background_color(Color::rgb(20,80,200))
+        .set_space(Stretch(1.0))
+        .class("increment")
+);
+
+Label::new("0").build(state, row, |builder| 
+    builder
+        .set_width(Pixels(100.0))
+        .set_height(Pixels(30.0))
+        .set_background_color(Color::rgb(80,80,80))
+        .set_space(Stretch(1.0))
+);
+```
+
+Now we can write some css to affect the styling of our widgets. Add the following to the top of the `main.rs` file just below the `use tuix::*` line:
+
+```rs
+const STYLE: &str = r#"
+    button {
+        border-radius: 3px;
+        child-space: 1s;
+    }
+
+    button.increment {
+        background-color: #2e7d32;
+        border-radius: 3px;
+    }
+
+    button.increment:hover {
+        background-color: #60ad5e;
+    }
+
+    button.increment:active {
+        background-color: #005005;
+    }
+    
+    button.decrement {
+        background-color: #c62828;
+        border-radius: 3px;
+    }
+
+    button.decrement:hover {
+        background-color: #ff5f52;
+    }
+
+    button.decrement:active {
+        background-color: #8e0000;
+    }
+
+    label {
+        background-color: #404040;
+        border-color: #606060;
+        border-width: 1px;
+        child-space: 1s;
+    }
+"#;
+```
+Since this isn't a css guide, we won't go into detail on how this works. But more information can be found in the [styling]() section of the book.
+
+Now we need to add the stylesheet to the app by calling `state.add_theme(STYLE)`. Typically this is done in the application closure before creating any widgets.
+
+Note also that *inline* properties override *shared* properties, so for the buttons to be affected we need to remove the calls which set their color on the builder. 
+
+A screenshot of the result is shown below. Note also that we've now fixed the text alignment within the widgets using the `child-space` property, which applies to both child widgets and text.
+
+<p align="center"><img src="../images/quick_guide/styling_widgets.png" alt="tuix app"></p>
+
+And the complete code is:
+
+```rust
+extern crate tuix;
 use tuix::*;
+
+const STYLE: &str = r#"
+    button {
+        border-radius: 3px;
+        child-space: 1s;
+    }
+
+    button.increment {
+        background-color: #2e7d32;
+        border-radius: 3px;
+    }
+
+    button.increment:hover {
+        background-color: #60ad5e;
+    }
+
+    button.increment:active {
+        background-color: #005005;
+    }
+    
+    button.decrement {
+        background-color: #c62828;
+        border-radius: 3px;
+    }
+
+    button.decrement:hover {
+        background-color: #ff5f52;
+    }
+
+    button.decrement:active {
+        background-color: #8e0000;
+    }
+
+    label {
+        background-color: #404040;
+        border-color: #606060;
+        border-width: 1px;
+        child-space: 1s;
+    }
+"#;
 
 fn main() {
     let window_description = WindowDescription::new()
-        .with_title("Custom Title")
-        .with_inner_size(300, 300);
-
+        .with_title("Counter")
+        .with_inner_size(400, 100);
     let app = Application::new(window_description, |state, window| {
-    
-        // Create a shared style wich applies to all widgets with class name "my_class"
-        let style_rule: StyleRule = StyleRule::new()
-            .selector(Selector::new().class("my_class"))
-            .set_height(Pixels(30.0))
-            .set_background_color(Color::rgb(80,200,20));
 
-        // Add the shared style rule to state
-        state.add_style_rule(style_rule);
-
-        let container = Element::new().build(state, window.entity(), |builder| 
-            builder
-                .set_width(Pixels(100.0))
-                .set_space_left(Stretch(1.0))
-                .set_space_right(Stretch(1.0))
-                .set_space_top(Stretch(1.0))
-                .set_space_bottom(Stretch(1.0))
-                .set_background_color(Color::rgb(20,80,200))
-
-                // Add a class name "my_class"
-                .class("my_class")
-        );
-
-        Button::new().build(state, container, |builder| 
-            builder
-                .set_width(Pixels(30.0))
-
-                // Add a class name "my_class"
-                .class("my_class")
-        );
-
-    });
-
-    app.run();
-}
-```
-
-Note that the style rule has to be added to the app using `state.add_style_rule()`. Note also that *inline* properties override *shared* properties, so although both widgets are affected by the shared style, the button keeps its blue color as it comes from an inline style rule. The height property, on the other hand, is shared between the two widgets. Below is the output of this code:
-
-![widget_styling_01](../images/widget_styling_01.png)
-
-## Stylesheets
-
-Tuix also offers the ability to define styles in separate stylesheet files with .css extensions. However, although some of the style properties available in tuix share the same name as css properties, in general the available style properties are different.
-
-We can produce the same shared style as before with the following code in a separate 'theme.css' file:
-
-```css
-.my_class {
-    height: 30px;
-    background-color: #50c814;
-}
-```
-
-This file can then be included in the binary with the `include_str!` macro and then added to the application with `state.add_theme()` like so:
-
-```rs
-use tuix::*;
-
-const THEME: &str = include_str!("path_to_stylesheet/theme.css");
-
-fn main() {
-    let window_description = WindowDescription::new().with_title("Custom Title").set_inner_size(300,300);
-    let app = Application::new(window_description, |state, window| {
+        state.add_theme(STYLE);
         
-        // Add external stylehseet to the application
-        state.add_theme(THEME);
-
-        let container = Element::new().build(state, window.entity(), |builder| 
+        let row = Row::new().build(state, window, |builder| 
             builder
-                .set_width(Pixels(100.0))
-                .set_space_left(Stretch(1.0))
-                .set_space_right(Stretch(1.0))
-                .set_space_top(Stretch(1.0))
-                .set_space_bottom(Stretch(1.0))
-                .set_background_color(Color::rgb(20,80,200))
-
-                // Add a class name "my_class"
-                .class("my_class")
-
-
+                .set_child_space(Stretch(1.0))
+                .set_col_between(Pixels(10.0))
         );
 
-        Button::new().build(state, container, |builder| 
+        Button::with_label("Decrement").build(state, row, |builder| 
             builder
-                .set_width(Pixels(30.0))
+                .set_width(Pixels(100.0))
+                .set_height(Pixels(30.0))
+                .class("decrement")
+        );
 
-                // Add a class name "my_class"
-                .class("my_class")
+        Button::with_label("Increment").build(state, row, |builder| 
+            builder
+                .set_width(Pixels(100.0))
+                .set_height(Pixels(30.0))
+                .class("increment")
+        );
+
+        Label::new("0").build(state, row, |builder| 
+            builder
+                .set_width(Pixels(100.0))
+                .set_height(Pixels(30.0))
         );
 
     });
 
     app.run();
 }
+
 ```
+
+Tuix also offers the ability to define styles in separate stylesheet files with .css extensions, which can then be included with the `include_str!` macro. However, although some of the style properties available in tuix share the same name as css properties, in general the available style properties are different.
 
 Alternatively, `state.add_stylesheet()` can be used to add a stylesheet dynamically by specifying the path to the css file. This allows for hot reloading of the stylesheet using the F5 key, however, the css file must be shipped with the executable.
+
+In the next section, we'll move what we've made so far into its own custom widget with a variable for the actual count.

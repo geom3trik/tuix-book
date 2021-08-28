@@ -1,55 +1,57 @@
 # Adding a Widget
 
-We can add a simple widget to our application like so:
+For our counter we know we're going to need two buttons (for increment and decrement) and at least one label (to show the value). But to strt with let's add just one of the buttons to our window:
 
-```rs
+```rust
+extern crate tuix;
 use tuix::*;
 
 fn main() {
     let window_description = WindowDescription::new()
-        .with_title("Custom Title")
-        .with_inner_size(300, 300);
-    let app = Application::new(|state, window| {
+        .with_title("Counter")
+        .with_inner_size(400, 100);
+    let app = Application::new(window_description, |state, window| {
             
-            // Add an Element widget
-            Element::new().build(state, window.entity(), |builder| builder);
-        },
-    );
+        // Add an Button widget
+        Button::with_label("Increment")
+            .build(state, window, |builder| builder);
+    });
 
     app.run();
 }
 
 ```
-An `Element` widget is the simplest built-in widget that tuix has. It contains no data or event handling logic but can be styled like any other widget.
+To add the button widget we first created a new instance with `Button::with_label("Increment")`. This creates a new button and also gives it some text to use as a label. If we didn't want any text we could have also used the `::new()` method.
 
-To add the element widget we first create a new instance with `Element::new()`, and then build the widget into the app with `.build(state, window.entity(), |builder| builder)`. 
+The button instance is then built into the app with `.build(state, window, |builder| builder)`. 
 
-- The first argument,`state`, is a mutable reference to `State` from the application closure. 
+- The first argument, `state`, is a mutable reference to `State` from the application closure. 
 
-- The second argument is the entity id of the parent widget, in this case the window widget, which we get by calling `window.entity()`. Each widget has an `Entity` id which can be used to get and set various widget properties stored in `State`.
+- The second argument is the entity id of the parent widget, in this case the window widget, which is the second argument of the application closure. Each widget has an `Entity` id which can be used to get and set various widget properties stored in `State`, and used to identify parent widgets to their children.
 
-- The third argument is a closure which provides us with a builder we can use to set properties of the newly created widget.
+- The third argument is a closure which provides us with a builder we can use to set properties of the newly created widget, which we'll cover in a moment.
 
-However, if you build and run this code you will still see an empty window.
+If you build and run this code though you will see an almost empty window with just the text `"Incremement"` in the top left corner:
 
-![adding_widgets_01](../images/adding_widgets_01.png)
+<p align="center"><img src="../images/quick_guide/unstyled_button.png" alt="unstyled button"></p>
 
-This is because the `Element` widget has no built-in styling. To see the element, we can add a width, height, and background color using the builder:
+This is because the `Button` widget has no built-in styling. To see the button, we can add a width, height, and background color using the builder like so:
 
-```rs
+```rust
+extern crate tuix;
 use tuix::*;
 
 fn main() {
     let window_description = WindowDescription::new()
-        .with_title("Custom Title")
-        .with_inner_size(300, 300);
+        .with_title("Counter")
+        .with_inner_size(400, 100);
     let app = Application::new(window_description, |state, window| {
             
-            Element::new().build(state, window.entity(), |builder| {
+            Button::with_label("Increment").build(state, window, |builder| {
                 builder
                     .set_width(Pixels(100.0))
                     .set_height(Pixels(30.0))
-                    .set_background_color(Color::rgb(200, 80, 20))
+                    .set_background_color(Color::rgb(20, 80, 200))
             });
         
         },
@@ -59,6 +61,9 @@ fn main() {
 }
 ```
 
-This will produce a nice orange widget in the top left corner of the window with a width of 100 pixels and a height of 30 pixels. In the next section we will look at how to compose widgets together by adding a button to our element widget.
+This will produce a nice blue button in the top left corner of the window with a width of 100 pixels and a height of 30 pixels, and with a label showing `"Incremement"`. Note that the text is not aligned in the center. This will be fixed later in the guide.
 
-![adding_widgets_02](../images/adding_widgets_02.png)
+<p align="center"><img src="../images/quick_guide/styled_button.png" alt="tuix app"></p>
+
+In the next section we will look at how to move our button into a more interesting position.
+
