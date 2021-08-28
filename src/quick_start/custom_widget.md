@@ -2,7 +2,7 @@
 
 Our code so far produces something that *looks* like it could be a counter but it doesn't do anything yet. In the next section we'll dive into events and how we can use them to add some functionality to the app, but first we need to cover the concept of custom widgets.
 
-So far we've used some of the built-in widgets in tuix to build our app, but it's time to build our own `Counter` widget to contain what we've built so far. We'll also need it to react to events.
+So far we've used some of the built-in widgets in tuix to build our app, but it's time to build our own `Counter` widget to contain what we've built so far, and we'll also need it to react to events.
 
 Start by creating a struct called `Counter`, and we'll derive `Default` so we don't need to write a constructor:
 
@@ -28,7 +28,7 @@ impl Widget for Counter {
 ```
 Let's take a moment to break down the pieces of the `Widget` trait. There are two associated types, `Ret` and `Data`:
 
-- The `Ret` associated type is used to specify what should be returned when the widget is built. Typically a widget will return its `Entity` id, but a widget could be made up of several sub-widgets, some of which the user may need access to when building. In these cases the `Ret` type can be set to a tuple, such as `(Entity, Entity)`. For out counte though we'll just return an `Entity`.
+- The `Ret` associated type is used to specify what should be returned when the widget is built. Typically a widget will return its `Entity` id, but a widget could be made up of several sub-widgets, some of which the user may need access to when building. In these cases the `Ret` type can be set to a tuple, such as `(Entity, Entity)`. For our counter we'll just return an `Entity`.
 - The `Data` associated type is used by the binding system, which for now we will save for a later section of the guide. In the meantime you can set this to `()`.
 
 The `Widget` trait has a few methods, but only the `on_build()` method is required to be implemented, and must return the `Ret` associated type. Usually this will be the entity id of the widget which is passed as an argument to the function.
@@ -77,19 +77,19 @@ impl Widget for Counter {
 
 ```
 
-Now that we have a counter wiget, which contains our buttons and label, howdo we use it? Well, the same as any other widget! Where we had the row, buttons, and label, insert the following line:
+Now that we have a counter wiget, which contains our buttons and label, how do we use it? Well, the same as any other widget! Where we had the row, buttons, and label, insert the following line:
 
 ```rs
 Counter::default().build(state, window, |builder| builder);
 ```
 
-As with the row widget, the counter by default will fill the available space and running the code appears to produce the same as what we had before:
+As with the row widget, the counter by default will fill the available space, and running the code appears to produce the same result as we had before:
 
 <p align="center"><img src="../images/quick_guide/styling_widgets.png" alt="tuix app"></p>
 
 That seemed like a lot of work for no noticable change. However, it's in the next section that things get interesting for our counter widget.
 
-Also, the complete code so far:
+Also, here is the complete code so far:
 
 ```rust
 extern crate tuix;

@@ -1,6 +1,6 @@
 # Composing Widgets
 
-So far our counter has only a single button. Let's add another button and a label, as well as a `Row` widget to be the parent of all three:
+So far our counter has only a single button. Let's add another button and a label, as well as a `Row` widget to be the parent of our buttons and label. A `Row` widget, as the name suggests, lays out its children in a horizontal row:
 
 ```rust
 extern crate tuix;
@@ -44,11 +44,11 @@ fn main() {
 }
 ```
 
-Building the second button widget works in the same way as the first. However, notice that the building of both button now uses `row` as the parent. This is the `Entity` id of the `Row` widget instance and is returned by its `.build(...)` method, which is using `window` as its parent.
+Building the second button widget works in the same way as the first. However, notice that the building of both buttons now uses `row` as the parent. This is the `Entity` id of the `Row` widget instance and is returned by its `.build(...)` method. The row uses the `window` as its parent.
 
-This id is then used to specify the element widget as the parent of the button widget in the button's `.build(...)` method.
+Composing these widgets like this forms a tree, where each widget has a single parent and zero or more children. In tuix, this tree is used to propagate events as well as to draw the elements in the correct order. Below is a diagram depicting the current tree of widgets:
 
-Composing these widgets like this forms a tree, where each widget has a single parent and zero or more children. In tuix, this tree is used to propagate events as well as to draw the elements in the correct order.
+<p align="center"><img src="../images/quick_guide/basic_tree.png" alt="tuix app"></p>
 
 Running this code produces:
 
@@ -73,3 +73,5 @@ Row::new().build(state, window, |builder|
 This sets the space around all of the children of the row (our buttons and label) to stretch, and also sets a fixed horizontal spacing between them of 10 pixels:
 
 <p align="center"><img src="../images/quick_guide/correctly_spaced.png" alt="tuix app"></p>
+
+In the nect section we'll add some styling to our app.

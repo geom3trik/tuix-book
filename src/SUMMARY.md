@@ -12,7 +12,9 @@
 - [Styling the App](./quick_start/widget_styling.md)
 - [Creating a Counter Widget](./quick_start/custom_widget.md)
 - [Handling Events](./quick_start/handling_events.md)
-- [Reactivity and Binding](./quick_start/reactivity_and_binding.md)
+- [Reactivity and Model Data](./quick_start/reactivity_and_binding.md)
+- [Lenses and Binding](./quick_start/lenses_and_binding.md)
+- [Making the Counter Reusable](./quick_start/updating.md)
 
 # Layout
 

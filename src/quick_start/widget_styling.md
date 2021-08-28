@@ -1,3 +1,4 @@
+# Styling the App
 
 Our app now consists of two blue buttons and a gray label. Let's be honest, that doesn't look great and it doesn't feel like a GUI yet. The buttons don't even do anything when you hover and press them.
 
@@ -27,17 +28,9 @@ Button::with_label("Increment").build(state, row, |builder|
         .set_space(Stretch(1.0))
         .class("increment")
 );
-
-Label::new("0").build(state, row, |builder| 
-    builder
-        .set_width(Pixels(100.0))
-        .set_height(Pixels(30.0))
-        .set_background_color(Color::rgb(80,80,80))
-        .set_space(Stretch(1.0))
-);
 ```
 
-Now we can write some css to affect the styling of our widgets. Add the following to the top of the `main.rs` file just below the `use tuix::*` line:
+Here we've added `"increment"` and `"decrement"` class names to our buttons. Now we can write some css to affect the styling of our widgets. Add the following to the top of the `main.rs` file just below the `use tuix::*` line:
 
 ```rs
 const STYLE: &str = r#"
@@ -80,7 +73,7 @@ const STYLE: &str = r#"
     }
 "#;
 ```
-Since this isn't a css guide, we won't go into detail on how this works. But more information can be found in the [styling]() section of the book.
+Since this isn't a css guide, we won't go into detail on how this works. But more information can be found in the [styling](../styling/overview.md) section of the book.
 
 Now we need to add the stylesheet to the app by calling `state.add_theme(STYLE)`. Typically this is done in the application closure before creating any widgets.
 

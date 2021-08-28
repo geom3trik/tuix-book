@@ -1,6 +1,6 @@
 # Styling
 
-Stlying elts us add properties to our widgets that change their visual appearance. Technically, layout propeties fall under styling as well, but for simplicity in learning the layout properties are detailed in a [separate section of the book](/layout/stack_overview.md).
+Stlying lets us add properties to our widgets that change their visual appearance. Technically, layout propeties fall under styling as well, but for simplicity in learning the layout properties are detailed in a [separate section of the book](/layout/stack_overview.md).
 
 # Available Properties
 

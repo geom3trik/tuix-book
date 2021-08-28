@@ -18,7 +18,7 @@ fn main() {
 }
 ```
 
-Using the builder pattern, setting window properties can be chained together. Let's restrict the size of the window to just 400 by 100. We don't need all that space for a simple counter:
+Using the builder pattern, setting window properties can be chained together. Let's change the size of the window to just 400 by 100. We don't need all that space for a simple counter:
 
 ```rust
 extern crate tuix;

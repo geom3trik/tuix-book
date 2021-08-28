@@ -1,4 +1,4 @@
-# Creating a Tuix Application
+# Creating an Application
 
 Add the following code to the `main.rs` file:
 
@@ -32,6 +32,6 @@ The second argument passed to the new method is a closure which provides us with
 
 2. `window` - This is an `Entity` id to the window widget created for us by tuix. Every widget has an entity id which is used with state to modify UI properties.
 
-In the next section we'll cover changing window properties like size, title, and icon.
+In the next section we'll cover changing window properties like the title and inner size.
 
 

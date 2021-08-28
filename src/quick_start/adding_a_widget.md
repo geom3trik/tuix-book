@@ -1,6 +1,6 @@
-# Adding a Widget
+# Adding a Button
 
-For our counter we know we're going to need two buttons (for increment and decrement) and at least one label (to show the value). But to strt with let's add just one of the buttons to our window:
+For our counter we know we will need two buttons (for increment and decrement) and at least one label (to show the value). But to start with let's just add one of the buttons to our window with the following code:
 
 ```rust
 extern crate tuix;
@@ -21,7 +21,7 @@ fn main() {
 }
 
 ```
-To add the button widget we first created a new instance with `Button::with_label("Increment")`. This creates a new button and also gives it some text to use as a label. If we didn't want any text we could have also used the `::new()` method.
+To add the button widget we create a new instance with `Button::with_label("Increment")`. This creates a new button and also gives it some text to use as a label. If we didn't want any text we could have also used the `::new()` method.
 
 The button instance is then built into the app with `.build(state, window, |builder| builder)`. 
 
@@ -31,7 +31,7 @@ The button instance is then built into the app with `.build(state, window, |buil
 
 - The third argument is a closure which provides us with a builder we can use to set properties of the newly created widget, which we'll cover in a moment.
 
-If you build and run this code though you will see an almost empty window with just the text `"Incremement"` in the top left corner:
+If you build and run this code though you will see an almost empty window with just the text `"Increment"` in the top left corner:
 
 <p align="center"><img src="../images/quick_guide/unstyled_button.png" alt="unstyled button"></p>
 
@@ -61,7 +61,7 @@ fn main() {
 }
 ```
 
-This will produce a nice blue button in the top left corner of the window with a width of 100 pixels and a height of 30 pixels, and with a label showing `"Incremement"`. Note that the text is not aligned in the center. This will be fixed later in the guide.
+This will produce a nice blue button in the top left corner of the window with a width of 100 pixels and a height of 30 pixels, and with a text showing `"Increment"`. Note that the text is not aligned in the center of the button. This will be fixed later in the guide during styling.
 
 <p align="center"><img src="../images/quick_guide/styled_button.png" alt="tuix app"></p>
 
