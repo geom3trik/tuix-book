@@ -173,7 +173,7 @@ struct CounterState {
     fn view&lt;'a&gt;(&amp;self, data: &amp;'a Self::Source) -&gt; &amp;'a Self::Target;
 }
 </code></pre>
-<p>The derive macro creates for us a zero-sized static type and then implments this <code>Lens</code> trait on it, which might look something like this:</p>
+<p>The derive macro creates for us a zero-sized static type and then implements this <code>Lens</code> trait on it, which might look something like this:</p>
 <pre><code class="language-rs">pub struct SomeGeneratedType;
 
 impl Lens for SomeGeneratedType {
@@ -187,7 +187,7 @@ impl Lens for SomeGeneratedType {
 </code></pre>
 <p>The other thing that the derive macro does is to create a static instance of the generated type, with the same name as the field (<code>value</code>), within a module called <code>CounterState</code>. This is what allows us to use <code>CounterState::value</code> to refer to the lens.</p>
 <h2 id="binding-another-label"><a class="header" href="#binding-another-label">Binding Another Label</a></h2>
-<p>Now when we run the code we seemingly get the same counter behaviour as before. The buttons update the value, via events, and the label receives the new value and updates its display. So why did we do this? Well, now we can do something more interesting, like bind another widget to the same value and display it in a different way, like printing the value as english text. Add the following dependency to the <code>Cargo.toml</code> file:</p>
+<p>Now when we run the code we seemingly get the same counter behavior as before. The buttons update the value, via events, and the label receives the new value and updates its display. So why did we do this? Well, now we can do something more interesting, like bind another widget to the same value and display it in a different way, like printing the value as english text. Add the following dependency to the <code>Cargo.toml</code> file:</p>
 <pre><code class="language-sh">english-numbers = &quot;0.3.3&quot;
 </code></pre>
 <p>Then add a label to the application below the counter with the following <code>bind</code> method:</p>

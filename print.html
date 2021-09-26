@@ -304,7 +304,7 @@ fn main() {
 <li>Widgets can be moved, relative to their stack or grid position, by adding space to each of their sides, <a href="quick_start/../layout/stacks.html">left</a>, <a href="quick_start/../layout/stacks.html">right</a>, <a href="quick_start/../layout/stacks.html">top</a>, and <a href="quick_start/../layout/stacks.html">bottom</a>, (or <a href="quick_start/../layout/stacks.html">space</a> for all four at once).</li>
 <li>Space comes in four varieties:
 <ul>
-<li>auto - can be overriden by parent</li>
+<li>auto - can be overridden by parent</li>
 <li>stretch - a proportion of the remaining free space</li>
 <li>percentage - a proportion of the parent width/height</li>
 <li>pixels - an exact number of pixels</li>
@@ -375,7 +375,7 @@ fn main() {
 </code></pre>
 <p>This sets the space around all of the children of the row (our buttons and label) to stretch, and also sets a fixed horizontal spacing between them of 10 pixels:</p>
 <p align="center"><img src="quick_start/../images/quick_guide/correctly_spaced.png" alt="tuix app"></p>
-<p>In the nect section we'll add some styling to our app.</p>
+<p>In the next section we'll add some styling to our app.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="styling-the-app"><a class="header" href="#styling-the-app">Styling the App</a></h1>
 <p>Our app now consists of two blue buttons and a gray label. Let's be honest, that doesn't look great and it doesn't feel like a GUI yet. The buttons don't even do anything when you hover and press them.</p>
 <p>To fix this we will add style to our widgets. Tuix has two forms of styling:</p>
@@ -758,7 +758,7 @@ pub enum CounterEvent {
 </code></pre>
 <p>For clarity I've included the argument types but these can be inferred by the rust compiler. Notice that the arguments shadow those of <code>on_build</code> and the first 3 of <code>on_event</code>, providing a mutable reference to the widget (<code>Button</code> in this case), a mutable reference to <code>State</code>, and the <code>Entity</code> id of the button.</p>
 <p>Using the button id and state we call <code>emit()</code> to send a <code>CounterEvent::Decrement</code> event. As the name suggests, this callback will be triggered when the button is pressed.</p>
-<p>But where does the event go? Remember that tree which was mentioned before? Well, by default, events are sent <em>up</em> the tree, hitting every ancestor on its way to the root (the window). Because the button is a decendent of the counter (counter -&gt; row -&gt; button), the counter will receive the event after the button is pressed. The figure below depicts the tree of widgets with our custom counter widget:</p>
+<p>But where does the event go? Remember that tree which was mentioned before? Well, by default, events are sent <em>up</em> the tree, hitting every ancestor on its way to the root (the window). Because the button is a descendant of the counter (counter -&gt; row -&gt; button), the counter will receive the event after the button is pressed. The figure below depicts the tree of widgets with our custom counter widget:</p>
 <p align="center"><img src="quick_start/../images/quick_guide/counter_tree.png" alt="tuix app"></p>
 <p>We're almost there. Adding in the callback for the increment button (left as an exercise for the reader), we now have a counter whose value will change when the buttons are pressed! Hang on though... nothing seems to be happening... the label still shows zero. Ah, we need to make two more modifications to update the label.</p>
 <p>First, we need to store the entity id of the label in the counter so we can access it in <code>on_event</code>. Change the <code>Counter</code> to:</p>
@@ -817,7 +817,7 @@ struct CounterState {
 }
 </code></pre>
 <p>The <code>Model</code> trait is similar to the <code>Widget</code> trait but is used for non-visual data. It also contains an <code>on_event</code> method to respond to events, and allows us to <code>build</code> the data into the tree. </p>
-<p>Modify the implmentation of <code>Model</code> on <code>CounterState</code> so that it updates the value in response to a <code>CounterEvent</code> within the <code>on_event</code> method, just like we did for our custom counter widget before:</p>
+<p>Modify the implementation of <code>Model</code> on <code>CounterState</code> so that it updates the value in response to a <code>CounterEvent</code> within the <code>on_event</code> method, just like we did for our custom counter widget before:</p>
 <pre><code class="language-rs">impl Model for CounterState {
     fn on_event(&amp;mut self, state: &amp;mut State, entity: Entity, event: &amp;mut Event) {
         if let Some(counter_event) = event.message.downcast() {
@@ -836,7 +836,7 @@ struct CounterState {
     }
 }
 </code></pre>
-<p>Note the call to emit a <code>BindEvent::Update</code> event at each point the value is changed. Tuix doesn't (yet) provide a built-in method to detect changes of application data, so this event must be sent manually so bound widgets so they receive an update.</p>
+<p>Note the call to emit a <code>BindEvent::Update</code> event at each point the value is changed. Tuix does not (yet) provide a built-in method to detect changes of application data, so this event must be sent manually so bound widgets so they receive an update.</p>
 <h3 id="building-model-data"><a class="header" href="#building-model-data">Building Model Data</a></h3>
 <p>Now that we have our application data in a separate struct we need to build it into the app. Insert this code into the application closure above the call to create and build the counter widget:</p>
 <pre><code class="language-rs">let app_data = CounterState::default().build(state, window);
@@ -886,7 +886,7 @@ struct CounterState {
     fn view&lt;'a&gt;(&amp;self, data: &amp;'a Self::Source) -&gt; &amp;'a Self::Target;
 }
 </code></pre>
-<p>The derive macro creates for us a zero-sized static type and then implments this <code>Lens</code> trait on it, which might look something like this:</p>
+<p>The derive macro creates for us a zero-sized static type and then implements this <code>Lens</code> trait on it, which might look something like this:</p>
 <pre><code class="language-rs">pub struct SomeGeneratedType;
 
 impl Lens for SomeGeneratedType {
@@ -900,7 +900,7 @@ impl Lens for SomeGeneratedType {
 </code></pre>
 <p>The other thing that the derive macro does is to create a static instance of the generated type, with the same name as the field (<code>value</code>), within a module called <code>CounterState</code>. This is what allows us to use <code>CounterState::value</code> to refer to the lens.</p>
 <h2 id="binding-another-label"><a class="header" href="#binding-another-label">Binding Another Label</a></h2>
-<p>Now when we run the code we seemingly get the same counter behaviour as before. The buttons update the value, via events, and the label receives the new value and updates its display. So why did we do this? Well, now we can do something more interesting, like bind another widget to the same value and display it in a different way, like printing the value as english text. Add the following dependency to the <code>Cargo.toml</code> file:</p>
+<p>Now when we run the code we seemingly get the same counter behavior as before. The buttons update the value, via events, and the label receives the new value and updates its display. So why did we do this? Well, now we can do something more interesting, like bind another widget to the same value and display it in a different way, like printing the value as english text. Add the following dependency to the <code>Cargo.toml</code> file:</p>
 <pre><code class="language-sh">english-numbers = &quot;0.3.3&quot;
 </code></pre>
 <p>Then add a label to the application below the counter with the following <code>bind</code> method:</p>
@@ -915,12 +915,12 @@ impl Lens for SomeGeneratedType {
 <p align="center"><img src="quick_start/../images/quick_guide/counter_reactive.png" alt="tuix app"></p>
 <p>In the next section we'll look at how we can make our counter widget more re-usable.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="making-the-counter-reusable"><a class="header" href="#making-the-counter-reusable">Making the Counter Reusable</a></h1>
-<p>Okay so we've got a reactive counter. It's reactive because when the value changes, via a button press, both labels update to show the new value without us having to explicitely send events to them.</p>
+<p>Okay so we've got a reactive counter. It's reactive because when the value changes, via a button press, both labels update to show the new value without us having to explicitly send events to them.</p>
 <p>However, with the way we've done it, our counter widget can't be used in another application unless it too has the same <code>CounterState</code> application data. We need to make our counter more generic.</p>
 <p>When using our <code>Counter</code> widget in an app we won't have access to the label as it's built into the widget. So instead of binding to the label, we need to be able to bind to the counter widget itself.</p>
 <h2 id="the-data-associated-type"><a class="header" href="#the-data-associated-type">The Data Associated Type</a></h2>
 <p>This is where the <code>Data</code> associated type comes in from the <code>Widget</code> trait, which we previously set to <code>()</code>. This associated type is used to specify the type of data a widget is expected to receive. It was mentioned before that a <code>Label</code> expects a <code>String</code>, which is because its associated data type is <code>type Data = String</code>.</p>
-<p>Let's modify our counter to remove the <code>bind</code> method on the <code>Label</code> within the <code>Counter</code> widet, and change the data associated type to <code>type Data = i32</code>. </p>
+<p>Let's modify our counter to remove the <code>bind</code> method on the <code>Label</code> within the <code>Counter</code> widget, and change the data associated type to <code>type Data = i32</code>. </p>
 <h2 id="on-update"><a class="header" href="#on-update">On Update</a></h2>
 <p>For actually updating the counter we'll use the <code>on_update</code> method provided by the <code>Widget</code> trait. Add the following code to the implementation of <code>Widget</code> for our <code>Counter</code> below the <code>on_update</code> method:</p>
 <pre><code class="language-rs">fn on_update(&amp;mut self, state: &amp;mut State, entity: Entity, data: &amp;Self::Data) {
@@ -938,12 +938,12 @@ impl Lens for SomeGeneratedType {
 <p>So how does this work? </p>
 <ol>
 <li>Building the <code>Model</code> created a <code>Store</code>, which itself is a widget which contains the application data as well as a list of observer widgets (using entity ids).</li>
-<li>The <code>bind</code> method sends an event to the store which registers the widget as an oberver.</li>
+<li>The <code>bind</code> method sends an event to the store which registers the widget as an observer.</li>
 <li>Pressing a button sends an event up the tree to the store, which then mutates the data in response.</li>
 <li>The store then calls the <code>on_update</code> method of all bound widgets, passing the new updated value.</li>
 </ol>
 <p>And we're done!</p>
-<p>When we build and run our app now we get the same behaviour as before but our counter widget is now re-usable! We could now add this counter widget into any application, and we just need to bind it to a piece of data, using the conversion closure to convert that data in some way to an <code>i32</code>. The label would then display the value. The only other part required is to respond to <code>CounterEvent</code> messages emited by the counter's buttons.</p>
+<p>When we build and run our app now we get the same behavior as before but our counter widget is now re-usable! We could now add this counter widget into any application, and we just need to bind it to a piece of data, using the conversion closure to convert that data in some way to an <code>i32</code>. The label would then display the value. The only other part required is to respond to <code>CounterEvent</code> messages emitted by the counter's buttons.</p>
 <p>The full code for this reactive counter can be found in the <code>/examples/counter_reactive.rs</code> file in the tuix repository and can be run with <code>cargo run --release --example counter_reactive</code>.</p>
 <h1 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h1>
 <p>This concludes the tuix 'quick' guide! If you made it this far, thanks for reading! The rest of this book attempts to cover the concepts shown in this guide in more detail, demonstrating what features are available and how they can be used to build complex user interfaces.</p>

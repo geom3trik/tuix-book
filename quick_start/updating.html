@@ -135,12 +135,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="making-the-counter-reusable"><a class="header" href="#making-the-counter-reusable">Making the Counter Reusable</a></h1>
-<p>Okay so we've got a reactive counter. It's reactive because when the value changes, via a button press, both labels update to show the new value without us having to explicitely send events to them.</p>
+<p>Okay so we've got a reactive counter. It's reactive because when the value changes, via a button press, both labels update to show the new value without us having to explicitly send events to them.</p>
 <p>However, with the way we've done it, our counter widget can't be used in another application unless it too has the same <code>CounterState</code> application data. We need to make our counter more generic.</p>
 <p>When using our <code>Counter</code> widget in an app we won't have access to the label as it's built into the widget. So instead of binding to the label, we need to be able to bind to the counter widget itself.</p>
 <h2 id="the-data-associated-type"><a class="header" href="#the-data-associated-type">The Data Associated Type</a></h2>
 <p>This is where the <code>Data</code> associated type comes in from the <code>Widget</code> trait, which we previously set to <code>()</code>. This associated type is used to specify the type of data a widget is expected to receive. It was mentioned before that a <code>Label</code> expects a <code>String</code>, which is because its associated data type is <code>type Data = String</code>.</p>
-<p>Let's modify our counter to remove the <code>bind</code> method on the <code>Label</code> within the <code>Counter</code> widet, and change the data associated type to <code>type Data = i32</code>. </p>
+<p>Let's modify our counter to remove the <code>bind</code> method on the <code>Label</code> within the <code>Counter</code> widget, and change the data associated type to <code>type Data = i32</code>. </p>
 <h2 id="on-update"><a class="header" href="#on-update">On Update</a></h2>
 <p>For actually updating the counter we'll use the <code>on_update</code> method provided by the <code>Widget</code> trait. Add the following code to the implementation of <code>Widget</code> for our <code>Counter</code> below the <code>on_update</code> method:</p>
 <pre><code class="language-rs">fn on_update(&amp;mut self, state: &amp;mut State, entity: Entity, data: &amp;Self::Data) {
@@ -158,12 +158,12 @@
 <p>So how does this work? </p>
 <ol>
 <li>Building the <code>Model</code> created a <code>Store</code>, which itself is a widget which contains the application data as well as a list of observer widgets (using entity ids).</li>
-<li>The <code>bind</code> method sends an event to the store which registers the widget as an oberver.</li>
+<li>The <code>bind</code> method sends an event to the store which registers the widget as an observer.</li>
 <li>Pressing a button sends an event up the tree to the store, which then mutates the data in response.</li>
 <li>The store then calls the <code>on_update</code> method of all bound widgets, passing the new updated value.</li>
 </ol>
 <p>And we're done!</p>
-<p>When we build and run our app now we get the same behaviour as before but our counter widget is now re-usable! We could now add this counter widget into any application, and we just need to bind it to a piece of data, using the conversion closure to convert that data in some way to an <code>i32</code>. The label would then display the value. The only other part required is to respond to <code>CounterEvent</code> messages emited by the counter's buttons.</p>
+<p>When we build and run our app now we get the same behavior as before but our counter widget is now re-usable! We could now add this counter widget into any application, and we just need to bind it to a piece of data, using the conversion closure to convert that data in some way to an <code>i32</code>. The label would then display the value. The only other part required is to respond to <code>CounterEvent</code> messages emitted by the counter's buttons.</p>
 <p>The full code for this reactive counter can be found in the <code>/examples/counter_reactive.rs</code> file in the tuix repository and can be run with <code>cargo run --release --example counter_reactive</code>.</p>
 <h1 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h1>
 <p>This concludes the tuix 'quick' guide! If you made it this far, thanks for reading! The rest of this book attempts to cover the concepts shown in this guide in more detail, demonstrating what features are available and how they can be used to build complex user interfaces.</p>

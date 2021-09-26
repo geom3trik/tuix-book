@@ -153,7 +153,7 @@ struct CounterState {
 }
 </code></pre>
 <p>The <code>Model</code> trait is similar to the <code>Widget</code> trait but is used for non-visual data. It also contains an <code>on_event</code> method to respond to events, and allows us to <code>build</code> the data into the tree. </p>
-<p>Modify the implmentation of <code>Model</code> on <code>CounterState</code> so that it updates the value in response to a <code>CounterEvent</code> within the <code>on_event</code> method, just like we did for our custom counter widget before:</p>
+<p>Modify the implementation of <code>Model</code> on <code>CounterState</code> so that it updates the value in response to a <code>CounterEvent</code> within the <code>on_event</code> method, just like we did for our custom counter widget before:</p>
 <pre><code class="language-rs">impl Model for CounterState {
     fn on_event(&amp;mut self, state: &amp;mut State, entity: Entity, event: &amp;mut Event) {
         if let Some(counter_event) = event.message.downcast() {
@@ -172,7 +172,7 @@ struct CounterState {
     }
 }
 </code></pre>
-<p>Note the call to emit a <code>BindEvent::Update</code> event at each point the value is changed. Tuix doesn't (yet) provide a built-in method to detect changes of application data, so this event must be sent manually so bound widgets so they receive an update.</p>
+<p>Note the call to emit a <code>BindEvent::Update</code> event at each point the value is changed. Tuix does not (yet) provide a built-in method to detect changes of application data, so this event must be sent manually so bound widgets so they receive an update.</p>
 <h3 id="building-model-data"><a class="header" href="#building-model-data">Building Model Data</a></h3>
 <p>Now that we have our application data in a separate struct we need to build it into the app. Insert this code into the application closure above the call to create and build the counter widget:</p>
 <pre><code class="language-rs">let app_data = CounterState::default().build(state, window);
