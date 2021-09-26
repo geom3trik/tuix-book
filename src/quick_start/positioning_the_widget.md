@@ -39,7 +39,7 @@ Okay, so while layout in tuix is highly customizable and flexible, it's quite a 
 - Widgets are positioned by their parent into a row, column, or grid with their siblings, determined by parent [layout-type](../layout/stacks.md).
 - Widgets can be moved, relative to their stack or grid position, by adding space to each of their sides, [left](../layout/stacks.md), [right](../layout/stacks.md), [top](../layout/stacks.md), and [bottom](../layout/stacks.md), (or [space](../layout/stacks.md) for all four at once).
 - Space comes in four varieties:
-    - auto - can be overriden by parent
+    - auto - can be overridden by parent
     - stretch - a proportion of the remaining free space
     - percentage - a proportion of the parent width/height
     - pixels - an exact number of pixels

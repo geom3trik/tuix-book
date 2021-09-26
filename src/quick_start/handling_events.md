@@ -68,7 +68,7 @@ For clarity I've included the argument types but these can be inferred by the ru
 
 Using the button id and state we call `emit()` to send a `CounterEvent::Decrement` event. As the name suggests, this callback will be triggered when the button is pressed.
 
-But where does the event go? Remember that tree which was mentioned before? Well, by default, events are sent *up* the tree, hitting every ancestor on its way to the root (the window). Because the button is a decendent of the counter (counter -> row -> button), the counter will receive the event after the button is pressed. The figure below depicts the tree of widgets with our custom counter widget:
+But where does the event go? Remember that tree which was mentioned before? Well, by default, events are sent *up* the tree, hitting every ancestor on its way to the root (the window). Because the button is a descendant of the counter (counter -> row -> button), the counter will receive the event after the button is pressed. The figure below depicts the tree of widgets with our custom counter widget:
 
 <p align="center"><img src="../images/quick_guide/counter_tree.png" alt="tuix app"></p>
 

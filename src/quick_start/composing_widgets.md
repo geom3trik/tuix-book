@@ -74,4 +74,4 @@ This sets the space around all of the children of the row (our buttons and label
 
 <p align="center"><img src="../images/quick_guide/correctly_spaced.png" alt="tuix app"></p>
 
-In the nect section we'll add some styling to our app.
+In the next section we'll add some styling to our app.

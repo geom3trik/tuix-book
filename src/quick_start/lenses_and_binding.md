@@ -52,7 +52,7 @@ pub trait Lens {
 }
 ```
 
-The derive macro creates for us a zero-sized static type and then implments this `Lens` trait on it, which might look something like this:
+The derive macro creates for us a zero-sized static type and then implements this `Lens` trait on it, which might look something like this:
 
 ```rs
 pub struct SomeGeneratedType;
@@ -70,7 +70,7 @@ The other thing that the derive macro does is to create a static instance of the
 
 ## Binding Another Label
 
-Now when we run the code we seemingly get the same counter behaviour as before. The buttons update the value, via events, and the label receives the new value and updates its display. So why did we do this? Well, now we can do something more interesting, like bind another widget to the same value and display it in a different way, like printing the value as english text. Add the following dependency to the `Cargo.toml` file:
+Now when we run the code we seemingly get the same counter behavior as before. The buttons update the value, via events, and the label receives the new value and updates its display. So why did we do this? Well, now we can do something more interesting, like bind another widget to the same value and display it in a different way, like printing the value as english text. Add the following dependency to the `Cargo.toml` file:
 
 ```sh
 english-numbers = "0.3.3"

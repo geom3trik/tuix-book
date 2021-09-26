@@ -1,6 +1,6 @@
 # Making the Counter Reusable
 
-Okay so we've got a reactive counter. It's reactive because when the value changes, via a button press, both labels update to show the new value without us having to explicitely send events to them.
+Okay so we've got a reactive counter. It's reactive because when the value changes, via a button press, both labels update to show the new value without us having to explicitly send events to them.
 
 However, with the way we've done it, our counter widget can't be used in another application unless it too has the same `CounterState` application data. We need to make our counter more generic.
 
@@ -10,7 +10,7 @@ When using our `Counter` widget in an app we won't have access to the label as i
 
 This is where the `Data` associated type comes in from the `Widget` trait, which we previously set to `()`. This associated type is used to specify the type of data a widget is expected to receive. It was mentioned before that a `Label` expects a `String`, which is because its associated data type is `type Data = String`.
 
-Let's modify our counter to remove the `bind` method on the `Label` within the `Counter` widet, and change the data associated type to `type Data = i32`. 
+Let's modify our counter to remove the `bind` method on the `Label` within the `Counter` widget, and change the data associated type to `type Data = i32`. 
 
 ## On Update
 
@@ -38,13 +38,13 @@ We pass the same lens as before to the value of the `CounterState` and the conve
 
 So how does this work? 
 1. Building the `Model` created a `Store`, which itself is a widget which contains the application data as well as a list of observer widgets (using entity ids).
-2. The `bind` method sends an event to the store which registers the widget as an oberver.
+2. The `bind` method sends an event to the store which registers the widget as an observer.
 3. Pressing a button sends an event up the tree to the store, which then mutates the data in response.
 4. The store then calls the `on_update` method of all bound widgets, passing the new updated value.
 
 And we're done!
 
-When we build and run our app now we get the same behaviour as before but our counter widget is now re-usable! We could now add this counter widget into any application, and we just need to bind it to a piece of data, using the conversion closure to convert that data in some way to an `i32`. The label would then display the value. The only other part required is to respond to `CounterEvent` messages emited by the counter's buttons.
+When we build and run our app now we get the same behavior as before but our counter widget is now re-usable! We could now add this counter widget into any application, and we just need to bind it to a piece of data, using the conversion closure to convert that data in some way to an `i32`. The label would then display the value. The only other part required is to respond to `CounterEvent` messages emitted by the counter's buttons.
 
 The full code for this reactive counter can be found in the `/examples/counter_reactive.rs` file in the tuix repository and can be run with `cargo run --release --example counter_reactive`.
 

@@ -137,7 +137,7 @@ enum CounterMessage {
 }
 ```
 
-With this event type defined we can now implement the `on_event` method in the `Widget` trait for our counter to respond to this event and muatate its internal state. In this case to increment/ decrement the count value and update the text of the label accordingly.
+With this event type defined we can now implement the `on_event` method in the `Widget` trait for our counter to respond to this event and mutate its internal state. In this case to increment/ decrement the count value and update the text of the label accordingly.
 
 ```rs
 impl Widget for Counter {

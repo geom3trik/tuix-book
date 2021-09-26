@@ -29,7 +29,7 @@ impl Model for CounterState {
 
 The `Model` trait is similar to the `Widget` trait but is used for non-visual data. It also contains an `on_event` method to respond to events, and allows us to `build` the data into the tree. 
 
-Modify the implmentation of `Model` on `CounterState` so that it updates the value in response to a `CounterEvent` within the `on_event` method, just like we did for our custom counter widget before:
+Modify the implementation of `Model` on `CounterState` so that it updates the value in response to a `CounterEvent` within the `on_event` method, just like we did for our custom counter widget before:
 
 ```rs
 impl Model for CounterState {
@@ -51,7 +51,7 @@ impl Model for CounterState {
 }
 ```
 
-Note the call to emit a `BindEvent::Update` event at each point the value is changed. Tuix doesn't (yet) provide a built-in method to detect changes of application data, so this event must be sent manually so bound widgets so they receive an update.
+Note the call to emit a `BindEvent::Update` event at each point the value is changed. Tuix does not (yet) provide a built-in method to detect changes of application data, so this event must be sent manually so bound widgets so they receive an update.
 
 ### Building Model Data
 
