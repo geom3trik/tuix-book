@@ -77,7 +77,7 @@ impl Widget for Counter {
 
 ```
 
-Now that we have a counter wiget, which contains our buttons and label, how do we use it? Well, the same as any other widget! Where we had the row, buttons, and label, insert the following line:
+Now that we have a counter widget, which contains our buttons and label, how do we use it? Well, the same as any other widget! Where we had the row, buttons, and label, insert the following line:
 
 ```rs
 Counter::default().build(state, window, |builder| builder);
@@ -87,7 +87,7 @@ As with the row widget, the counter by default will fill the available space, an
 
 <p align="center"><img src="../images/quick_guide/styling_widgets.png" alt="tuix app"></p>
 
-That seemed like a lot of work for no noticable change. However, it's in the next section that things get interesting for our counter widget.
+That seemed like a lot of work for no noticeable change. However, it's in the next section that things get interesting for our counter widget.
 
 Also, here is the complete code so far:
 

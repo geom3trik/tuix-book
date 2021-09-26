@@ -16,6 +16,10 @@
 - [Lenses and Binding](./quick_start/lenses_and_binding.md)
 - [Making the Counter Reusable](./quick_start/updating.md)
 
+# Building
+- [Building Widgets]()
+
+
 # Layout
 
 - [Overview (Stack)](./layout/stack_overview.md)
@@ -26,26 +30,33 @@
 - [Positioning Text](./layout/positioning_text.md)
 - [Layout Properties](./layout/layout_properties.md)
 
-# Events
+# Styling
+- [Overview](./styling/overview.md)
+- [Inline Styling](./styling/inline_styling.md)
+- [Shared Styling](./styling/shared_styling.md)
+- [Selectors](./styling/selectors.md)
+- [Style Properties](./styling/style_properties.md)
+    - [Display](./styling/display.md)
+    - [Background](./styling/background.md)
+    - [Border](./styling/border.md)
+    - [Shadows](./styling/shadows.md)
 
+# Events
 - [Overview](./events/chapter_1.md)
 - [Events and Messages](./events/events_and_messages.md)
 - [Event Propagation](./events/event_propagation.md)
 - [Handling Events](./events/handling_events.md)
 - [Window Events](./events/window_events.md)
 
-# Styling
-- [Overview](./styling/overview.md)
-- [Inline Styling](./styling/inline_styling.md)
-- [Shared Styling](./styling/shared_styling.md)
-- [Style Properties](./styling/style_properties.md)
-- [Selectors](./styling/selectors.md)
-    - [Display](./styling/display.md)
-    - [Background](./styling/background.md)
-    - [Border](./styling/border.md)
-    - [Shadows](./styling/shadows.md)
-
-# Bindng
+# Binding and Reactivity
 - [Introduction](./binding/intro.md)
 - [Model](./binding/model.md)
 - [Lens](./binding/lens.md)
+
+# Widget Reference
+- [Buttons](./widgets/buttons.md)
+    - [Button](./widgets/buttons/button.md)
+    - [CheckButton](./widgets/buttons/check_button.md)
+    - [Checkbox](./widgets/buttons/checkbox.md)
+    - [Radio](./widgets/buttons/radio.md)
+    - [Switch](./widgets/buttons/switch.md)
